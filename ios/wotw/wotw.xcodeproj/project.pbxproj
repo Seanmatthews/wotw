@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		14D656A9195E9BD700FF013A /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 14D656A8195E9BD700FF013A /* Storyboard.storyboard */; };
 		6412DD0C1533D7EE0044BF54 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6412DD0B1533D7EE0044BF54 /* Constants.m */; };
 		6412DD101533D9500044BF54 /* GetTokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6412DD0F1533D9500044BF54 /* GetTokenRequest.m */; };
 		6412DD131533D9AB0044BF54 /* GetTokenResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6412DD121533D9AB0044BF54 /* GetTokenResponse.m */; };
@@ -42,6 +43,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		14D656A8195E9BD700FF013A /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		6412DD0A1533D7EE0044BF54 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
 		6412DD0B1533D7EE0044BF54 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
 		6412DD0E1533D9500044BF54 /* GetTokenRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTokenRequest.h; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				64D988041516C12900EC03FA /* InfoPlist.strings */,
 				64D988071516C12900EC03FA /* main.m */,
 				64D988091516C12900EC03FA /* wotw-Prefix.pch */,
+				14D656A8195E9BD700FF013A /* Storyboard.storyboard */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -273,6 +276,7 @@
 				6494B28A15E9E67E004C796A /* Icon.png in Resources */,
 				6487A30C15F81926000F4CAE /* gastown_brick_wall_bg-35A.png in Resources */,
 				64231A7B15F83E570066E452 /* refresh_button.png in Resources */,
+				14D656A9195E9BD700FF013A /* Storyboard.storyboard in Resources */,
 				64231A8A15F8544F0066E452 /* map_button.png in Resources */,
 				647AF2CF15F96EAF000D57C3 /* wall_button.png in Resources */,
 			);
@@ -392,7 +396,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "wotw/wotw-Prefix.pch";
 				INFOPLIST_FILE = "wotw/wotw-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -412,7 +416,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "wotw/wotw-Prefix.pch";
 				INFOPLIST_FILE = "wotw/wotw-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
