@@ -1,0 +1,447 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		6412DD0C1533D7EE0044BF54 /* Constants.m in Sources */ = {isa = PBXBuildFile; fileRef = 6412DD0B1533D7EE0044BF54 /* Constants.m */; };
+		6412DD101533D9500044BF54 /* GetTokenRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6412DD0F1533D9500044BF54 /* GetTokenRequest.m */; };
+		6412DD131533D9AB0044BF54 /* GetTokenResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 6412DD121533D9AB0044BF54 /* GetTokenResponse.m */; };
+		6412DD161533D9E60044BF54 /* Request.m in Sources */ = {isa = PBXBuildFile; fileRef = 6412DD151533D9E60044BF54 /* Request.m */; };
+		6412DD191533DA140044BF54 /* Response.m in Sources */ = {isa = PBXBuildFile; fileRef = 6412DD181533DA140044BF54 /* Response.m */; };
+		6412DD1D1533DB480044BF54 /* AmazonKeyChainWrapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6412DD1C1533DB480044BF54 /* AmazonKeyChainWrapper.m */; };
+		6412DD201533DCC10044BF54 /* AmazonTVMClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 6412DD1F1533DCC10044BF54 /* AmazonTVMClient.m */; };
+		6412DD231533DDA60044BF54 /* Crypto.m in Sources */ = {isa = PBXBuildFile; fileRef = 6412DD221533DDA60044BF54 /* Crypto.m */; };
+		6412DD261533DDBE0044BF54 /* GetTokenResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6412DD251533DDBE0044BF54 /* GetTokenResponseHandler.m */; };
+		6412DD2B1533DDD30044BF54 /* JSONUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 6412DD281533DDD20044BF54 /* JSONUtilities.m */; };
+		6412DD2C1533DDD30044BF54 /* RegisterDeviceRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6412DD2A1533DDD30044BF54 /* RegisterDeviceRequest.m */; };
+		6412DD2F1533DE3A0044BF54 /* RequestDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 6412DD2E1533DE3A0044BF54 /* RequestDelegate.m */; };
+		6412DD321533DE470044BF54 /* ResponseHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = 6412DD311533DE470044BF54 /* ResponseHandler.m */; };
+		6412DD3615450E1F0044BF54 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6412DD3515450E1F0044BF54 /* Security.framework */; };
+		64231A7B15F83E570066E452 /* refresh_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 64231A7A15F83E570066E452 /* refresh_button.png */; };
+		64231A8615F84E030066E452 /* MapMessagesView.m in Sources */ = {isa = PBXBuildFile; fileRef = 64231A8515F84E030066E452 /* MapMessagesView.m */; };
+		64231A8815F84EBA0066E452 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64231A8715F84EBA0066E452 /* MapKit.framework */; };
+		64231A8A15F8544F0066E452 /* map_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 64231A8915F8544F0066E452 /* map_button.png */; };
+		646F1A4D1731E716009CD402 /* AWSiOSSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6412DD331533DEA80044BF54 /* AWSiOSSDK.framework */; };
+		647AF2CF15F96EAF000D57C3 /* wall_button.png in Resources */ = {isa = PBXBuildFile; fileRef = 647AF2CE15F96EAF000D57C3 /* wall_button.png */; };
+		647C9F2C159FD2CB0048EF4F /* AmazonClientManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 647C9F2B159FD2CB0048EF4F /* AmazonClientManager.m */; };
+		648125F715C49A8E00828EE9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 648125F615C49A8D00828EE9 /* CoreLocation.framework */; };
+		6487A30C15F81926000F4CAE /* gastown_brick_wall_bg-35A.png in Resources */ = {isa = PBXBuildFile; fileRef = 6487A30B15F81926000F4CAE /* gastown_brick_wall_bg-35A.png */; };
+		6494B28A15E9E67E004C796A /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6494B28915E9E67E004C796A /* Icon.png */; };
+		64D987FC1516C12900EC03FA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D987FB1516C12900EC03FA /* UIKit.framework */; };
+		64D987FE1516C12900EC03FA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D987FD1516C12900EC03FA /* Foundation.framework */; };
+		64D988001516C12900EC03FA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 64D987FF1516C12900EC03FA /* CoreGraphics.framework */; };
+		64D988061516C12900EC03FA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 64D988041516C12900EC03FA /* InfoPlist.strings */; };
+		64D988081516C12900EC03FA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 64D988071516C12900EC03FA /* main.m */; };
+		64D9880C1516C12900EC03FA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 64D9880B1516C12900EC03FA /* AppDelegate.m */; };
+		64D9880F1516C12900EC03FA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 64D9880E1516C12900EC03FA /* ViewController.m */; };
+		64D988121516C12900EC03FA /* ViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 64D988101516C12900EC03FA /* ViewController.xib */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		6412DD0A1533D7EE0044BF54 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		6412DD0B1533D7EE0044BF54 /* Constants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Constants.m; sourceTree = "<group>"; };
+		6412DD0E1533D9500044BF54 /* GetTokenRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTokenRequest.h; sourceTree = "<group>"; };
+		6412DD0F1533D9500044BF54 /* GetTokenRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTokenRequest.m; sourceTree = "<group>"; };
+		6412DD111533D9AB0044BF54 /* GetTokenResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTokenResponse.h; sourceTree = "<group>"; };
+		6412DD121533D9AB0044BF54 /* GetTokenResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTokenResponse.m; sourceTree = "<group>"; };
+		6412DD141533D9E60044BF54 /* Request.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Request.h; sourceTree = "<group>"; };
+		6412DD151533D9E60044BF54 /* Request.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Request.m; sourceTree = "<group>"; };
+		6412DD171533DA140044BF54 /* Response.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Response.h; sourceTree = "<group>"; };
+		6412DD181533DA140044BF54 /* Response.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Response.m; sourceTree = "<group>"; };
+		6412DD1B1533DB480044BF54 /* AmazonKeyChainWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmazonKeyChainWrapper.h; sourceTree = "<group>"; };
+		6412DD1C1533DB480044BF54 /* AmazonKeyChainWrapper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmazonKeyChainWrapper.m; sourceTree = "<group>"; };
+		6412DD1E1533DCC10044BF54 /* AmazonTVMClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmazonTVMClient.h; sourceTree = "<group>"; };
+		6412DD1F1533DCC10044BF54 /* AmazonTVMClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmazonTVMClient.m; sourceTree = "<group>"; };
+		6412DD211533DDA60044BF54 /* Crypto.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Crypto.h; sourceTree = "<group>"; };
+		6412DD221533DDA60044BF54 /* Crypto.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Crypto.m; sourceTree = "<group>"; };
+		6412DD241533DDBE0044BF54 /* GetTokenResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GetTokenResponseHandler.h; sourceTree = "<group>"; };
+		6412DD251533DDBE0044BF54 /* GetTokenResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GetTokenResponseHandler.m; sourceTree = "<group>"; };
+		6412DD271533DDD20044BF54 /* JSONUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONUtilities.h; sourceTree = "<group>"; };
+		6412DD281533DDD20044BF54 /* JSONUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONUtilities.m; sourceTree = "<group>"; };
+		6412DD291533DDD20044BF54 /* RegisterDeviceRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegisterDeviceRequest.h; sourceTree = "<group>"; };
+		6412DD2A1533DDD30044BF54 /* RegisterDeviceRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegisterDeviceRequest.m; sourceTree = "<group>"; };
+		6412DD2D1533DE3A0044BF54 /* RequestDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RequestDelegate.h; sourceTree = "<group>"; };
+		6412DD2E1533DE3A0044BF54 /* RequestDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RequestDelegate.m; sourceTree = "<group>"; };
+		6412DD301533DE470044BF54 /* ResponseHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResponseHandler.h; sourceTree = "<group>"; };
+		6412DD311533DE470044BF54 /* ResponseHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResponseHandler.m; sourceTree = "<group>"; };
+		6412DD331533DEA80044BF54 /* AWSiOSSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = AWSiOSSDK.framework; sourceTree = "<group>"; };
+		6412DD3515450E1F0044BF54 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		64231A7A15F83E570066E452 /* refresh_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = refresh_button.png; sourceTree = "<group>"; };
+		64231A8415F84E030066E452 /* MapMessagesView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MapMessagesView.h; sourceTree = "<group>"; };
+		64231A8515F84E030066E452 /* MapMessagesView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MapMessagesView.m; sourceTree = "<group>"; };
+		64231A8715F84EBA0066E452 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		64231A8915F8544F0066E452 /* map_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = map_button.png; sourceTree = "<group>"; };
+		647AF2CE15F96EAF000D57C3 /* wall_button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = wall_button.png; sourceTree = "<group>"; };
+		647C9F2A159FD2CA0048EF4F /* AmazonClientManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AmazonClientManager.h; sourceTree = "<group>"; };
+		647C9F2B159FD2CB0048EF4F /* AmazonClientManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AmazonClientManager.m; sourceTree = "<group>"; };
+		648125F615C49A8D00828EE9 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		6487A30B15F81926000F4CAE /* gastown_brick_wall_bg-35A.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gastown_brick_wall_bg-35A.png"; sourceTree = "<group>"; };
+		6494B28915E9E67E004C796A /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		64D987F71516C12900EC03FA /* wotw.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = wotw.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		64D987FB1516C12900EC03FA /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		64D987FD1516C12900EC03FA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		64D987FF1516C12900EC03FA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		64D988031516C12900EC03FA /* wotw-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "wotw-Info.plist"; sourceTree = "<group>"; };
+		64D988051516C12900EC03FA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		64D988071516C12900EC03FA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		64D988091516C12900EC03FA /* wotw-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "wotw-Prefix.pch"; sourceTree = "<group>"; };
+		64D9880A1516C12900EC03FA /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		64D9880B1516C12900EC03FA /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		64D9880D1516C12900EC03FA /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		64D9880E1516C12900EC03FA /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		64D988111516C12900EC03FA /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/ViewController.xib; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		64D987F41516C12900EC03FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				646F1A4D1731E716009CD402 /* AWSiOSSDK.framework in Frameworks */,
+				64231A8815F84EBA0066E452 /* MapKit.framework in Frameworks */,
+				648125F715C49A8E00828EE9 /* CoreLocation.framework in Frameworks */,
+				6412DD3615450E1F0044BF54 /* Security.framework in Frameworks */,
+				64D987FC1516C12900EC03FA /* UIKit.framework in Frameworks */,
+				64D987FE1516C12900EC03FA /* Foundation.framework in Frameworks */,
+				64D988001516C12900EC03FA /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6412DD1A1533DAF90044BF54 /* TVMClient */ = {
+			isa = PBXGroup;
+			children = (
+				6412DD1E1533DCC10044BF54 /* AmazonTVMClient.h */,
+				6412DD1F1533DCC10044BF54 /* AmazonTVMClient.m */,
+				6412DD211533DDA60044BF54 /* Crypto.h */,
+				6412DD221533DDA60044BF54 /* Crypto.m */,
+				6412DD0E1533D9500044BF54 /* GetTokenRequest.h */,
+				6412DD0F1533D9500044BF54 /* GetTokenRequest.m */,
+				6412DD111533D9AB0044BF54 /* GetTokenResponse.h */,
+				6412DD121533D9AB0044BF54 /* GetTokenResponse.m */,
+				6412DD241533DDBE0044BF54 /* GetTokenResponseHandler.h */,
+				6412DD251533DDBE0044BF54 /* GetTokenResponseHandler.m */,
+				6412DD271533DDD20044BF54 /* JSONUtilities.h */,
+				6412DD281533DDD20044BF54 /* JSONUtilities.m */,
+				6412DD291533DDD20044BF54 /* RegisterDeviceRequest.h */,
+				6412DD2A1533DDD30044BF54 /* RegisterDeviceRequest.m */,
+				6412DD141533D9E60044BF54 /* Request.h */,
+				6412DD151533D9E60044BF54 /* Request.m */,
+				6412DD2D1533DE3A0044BF54 /* RequestDelegate.h */,
+				6412DD2E1533DE3A0044BF54 /* RequestDelegate.m */,
+				6412DD171533DA140044BF54 /* Response.h */,
+				6412DD181533DA140044BF54 /* Response.m */,
+				6412DD301533DE470044BF54 /* ResponseHandler.h */,
+				6412DD311533DE470044BF54 /* ResponseHandler.m */,
+				6412DD1B1533DB480044BF54 /* AmazonKeyChainWrapper.h */,
+				6412DD1C1533DB480044BF54 /* AmazonKeyChainWrapper.m */,
+			);
+			name = TVMClient;
+			sourceTree = "<group>";
+		};
+		64D987EC1516C12900EC03FA = {
+			isa = PBXGroup;
+			children = (
+				64D988011516C12900EC03FA /* wotw */,
+				64D987FA1516C12900EC03FA /* Frameworks */,
+				64D987F81516C12900EC03FA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		64D987F81516C12900EC03FA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				64D987F71516C12900EC03FA /* wotw.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		64D987FA1516C12900EC03FA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				64231A8715F84EBA0066E452 /* MapKit.framework */,
+				648125F615C49A8D00828EE9 /* CoreLocation.framework */,
+				6412DD3515450E1F0044BF54 /* Security.framework */,
+				6412DD331533DEA80044BF54 /* AWSiOSSDK.framework */,
+				64D987FB1516C12900EC03FA /* UIKit.framework */,
+				64D987FD1516C12900EC03FA /* Foundation.framework */,
+				64D987FF1516C12900EC03FA /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		64D988011516C12900EC03FA /* wotw */ = {
+			isa = PBXGroup;
+			children = (
+				647C9F2A159FD2CA0048EF4F /* AmazonClientManager.h */,
+				647C9F2B159FD2CB0048EF4F /* AmazonClientManager.m */,
+				6412DD1A1533DAF90044BF54 /* TVMClient */,
+				64D9880A1516C12900EC03FA /* AppDelegate.h */,
+				64D9880B1516C12900EC03FA /* AppDelegate.m */,
+				64D9880D1516C12900EC03FA /* ViewController.h */,
+				64D9880E1516C12900EC03FA /* ViewController.m */,
+				64D988101516C12900EC03FA /* ViewController.xib */,
+				6412DD0A1533D7EE0044BF54 /* Constants.h */,
+				6412DD0B1533D7EE0044BF54 /* Constants.m */,
+				64231A8415F84E030066E452 /* MapMessagesView.h */,
+				64231A8515F84E030066E452 /* MapMessagesView.m */,
+				64D988021516C12900EC03FA /* Supporting Files */,
+			);
+			path = wotw;
+			sourceTree = "<group>";
+		};
+		64D988021516C12900EC03FA /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				647AF2CE15F96EAF000D57C3 /* wall_button.png */,
+				64231A8915F8544F0066E452 /* map_button.png */,
+				64231A7A15F83E570066E452 /* refresh_button.png */,
+				6487A30B15F81926000F4CAE /* gastown_brick_wall_bg-35A.png */,
+				6494B28915E9E67E004C796A /* Icon.png */,
+				64D988031516C12900EC03FA /* wotw-Info.plist */,
+				64D988041516C12900EC03FA /* InfoPlist.strings */,
+				64D988071516C12900EC03FA /* main.m */,
+				64D988091516C12900EC03FA /* wotw-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		64D987F61516C12900EC03FA /* wotw */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 64D988151516C12900EC03FA /* Build configuration list for PBXNativeTarget "wotw" */;
+			buildPhases = (
+				64D987F31516C12900EC03FA /* Sources */,
+				64D987F41516C12900EC03FA /* Frameworks */,
+				64D987F51516C12900EC03FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = wotw;
+			productName = wotw;
+			productReference = 64D987F71516C12900EC03FA /* wotw.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		64D987EE1516C12900EC03FA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Blink Gear";
+				TargetAttributes = {
+					64D987F61516C12900EC03FA = {
+						DevelopmentTeam = A2XP5DNQQP;
+					};
+				};
+			};
+			buildConfigurationList = 64D987F11516C12900EC03FA /* Build configuration list for PBXProject "wotw" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 64D987EC1516C12900EC03FA;
+			productRefGroup = 64D987F81516C12900EC03FA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				64D987F61516C12900EC03FA /* wotw */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		64D987F51516C12900EC03FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64D988061516C12900EC03FA /* InfoPlist.strings in Resources */,
+				64D988121516C12900EC03FA /* ViewController.xib in Resources */,
+				6494B28A15E9E67E004C796A /* Icon.png in Resources */,
+				6487A30C15F81926000F4CAE /* gastown_brick_wall_bg-35A.png in Resources */,
+				64231A7B15F83E570066E452 /* refresh_button.png in Resources */,
+				64231A8A15F8544F0066E452 /* map_button.png in Resources */,
+				647AF2CF15F96EAF000D57C3 /* wall_button.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		64D987F31516C12900EC03FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				64D988081516C12900EC03FA /* main.m in Sources */,
+				64D9880C1516C12900EC03FA /* AppDelegate.m in Sources */,
+				64D9880F1516C12900EC03FA /* ViewController.m in Sources */,
+				6412DD0C1533D7EE0044BF54 /* Constants.m in Sources */,
+				6412DD101533D9500044BF54 /* GetTokenRequest.m in Sources */,
+				6412DD131533D9AB0044BF54 /* GetTokenResponse.m in Sources */,
+				6412DD161533D9E60044BF54 /* Request.m in Sources */,
+				6412DD191533DA140044BF54 /* Response.m in Sources */,
+				6412DD1D1533DB480044BF54 /* AmazonKeyChainWrapper.m in Sources */,
+				6412DD201533DCC10044BF54 /* AmazonTVMClient.m in Sources */,
+				6412DD231533DDA60044BF54 /* Crypto.m in Sources */,
+				6412DD261533DDBE0044BF54 /* GetTokenResponseHandler.m in Sources */,
+				6412DD2B1533DDD30044BF54 /* JSONUtilities.m in Sources */,
+				6412DD2C1533DDD30044BF54 /* RegisterDeviceRequest.m in Sources */,
+				6412DD2F1533DE3A0044BF54 /* RequestDelegate.m in Sources */,
+				6412DD321533DE470044BF54 /* ResponseHandler.m in Sources */,
+				647C9F2C159FD2CB0048EF4F /* AmazonClientManager.m in Sources */,
+				64231A8615F84E030066E452 /* MapMessagesView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		64D988041516C12900EC03FA /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				64D988051516C12900EC03FA /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		64D988101516C12900EC03FA /* ViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				64D988111516C12900EC03FA /* en */,
+			);
+			name = ViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		64D988131516C12900EC03FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		64D988141516C12900EC03FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_OPTIMIZATION_LEVEL = s;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		64D988161516C12900EC03FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "wotw/wotw-Prefix.pch";
+				INFOPLIST_FILE = "wotw/wotw-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		64D988171516C12900EC03FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "wotw/wotw-Prefix.pch";
+				INFOPLIST_FILE = "wotw/wotw-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = 1;
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		64D987F11516C12900EC03FA /* Build configuration list for PBXProject "wotw" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				64D988131516C12900EC03FA /* Debug */,
+				64D988141516C12900EC03FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		64D988151516C12900EC03FA /* Build configuration list for PBXNativeTarget "wotw" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				64D988161516C12900EC03FA /* Debug */,
+				64D988171516C12900EC03FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 64D987EE1516C12900EC03FA /* Project object */;
+}
