@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "64D987F61516C12900EC03FA"
+               BlueprintIdentifier = "14D656F8195EB51A00FF013A"
                BuildableName = "wotw.app"
                BlueprintName = "wotw"
                ReferencedContainer = "container:wotw.xcodeproj">
@@ -28,11 +28,21 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "14D65719195EB51A00FF013A"
+               BuildableName = "wotwTests.xctest"
+               BlueprintName = "wotwTests"
+               ReferencedContainer = "container:wotw.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "64D987F61516C12900EC03FA"
+            BlueprintIdentifier = "14D656F8195EB51A00FF013A"
             BuildableName = "wotw.app"
             BlueprintName = "wotw"
             ReferencedContainer = "container:wotw.xcodeproj">
@@ -51,7 +61,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "64D987F61516C12900EC03FA"
+            BlueprintIdentifier = "14D656F8195EB51A00FF013A"
             BuildableName = "wotw.app"
             BlueprintName = "wotw"
             ReferencedContainer = "container:wotw.xcodeproj">
@@ -69,7 +79,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "64D987F61516C12900EC03FA"
+            BlueprintIdentifier = "14D656F8195EB51A00FF013A"
             BuildableName = "wotw.app"
             BlueprintName = "wotw"
             ReferencedContainer = "container:wotw.xcodeproj">
