@@ -25,6 +25,7 @@
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification;
 - (void)loadAnnotationsForRegion:(MKCoordinateRegion)region;
 - (void)refreshTable;
+- (void)writeMessageWithText:(NSString*)text;
 
 @end
 
@@ -33,11 +34,13 @@
 const long int TWO_WEEKS_SECONDS = 1209600;
 const double MESSAGES_RADIUS_METERS = 50.;
 
-- (id)init
+
+// This is called whenever the view is loaded through storyboard segues
+- (id)initWithCoder:(NSCoder*)coder
 {
-    self = [super init];
-    if (self) {
+    if (self = [super initWithCoder:coder]) {
         // TODO: Use TVM
+        NSLog(@"CALLEDD");
         sdbClient = [[AmazonSimpleDBClient alloc]
                      initWithAccessKey:@"AKIAJ5UTQAKVNG2ZWGYA"
                      withSecretKey:@"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"];
@@ -129,12 +132,13 @@ const double MESSAGES_RADIUS_METERS = 50.;
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
+    [textField resignFirstResponder];
     NSString* text = [textField text];
     if ([text length] > 0) {
-        
+        [self writeMessageWithText:text];
     }
     [textField setText:@""];
-    [textField resignFirstResponder];
+    [self refreshTable];
     return YES;
 }
 
@@ -159,12 +163,14 @@ const double MESSAGES_RADIUS_METERS = 50.;
     
     // NOTE: This version has no two week limit on messages
     NSString *query = [NSString stringWithFormat:@"SELECT %@ FROM `wotw-simpledb` WHERE timestamp IS NOT NULL AND lat > '%@' AND lat < '%@' AND long > '%@' AND long < '%@' ORDER BY timestamp ASC", fields, minLat, maxLat, minLong, maxLong];
+//    NSString *query = [NSString stringWithFormat:@"SELECT %@ FROM `wotw-simpledb`", fields];
     NSLog(@" query string: %@",query);
     
     @try {
         SimpleDBSelectRequest *selectRequest = [[SimpleDBSelectRequest alloc] initWithSelectExpression:query];
         selectRequest.consistentRead = YES;
         
+        NSLog(@"client %@", sdbClient);
         SimpleDBSelectResponse *selectResponse = [sdbClient select:selectRequest];
         NSLog(@"num messages: %d", selectResponse.items.count);
         return selectResponse.items;
@@ -182,6 +188,36 @@ const double MESSAGES_RADIUS_METERS = 50.;
     NSMutableArray *items = [self getFields:@"message" toDistance:[NSNumber numberWithDouble:MESSAGES_RADIUS_METERS]];
     messages = [[items valueForKey:@"attributes"] valueForKey:@"value"];
     [_tableView reloadData];
+}
+
+- (void)writeMessageWithText:(NSString*)text
+{
+    // Add latitude & longitude
+    NSNumber *timestamp = [[NSNumber alloc] initWithInteger:[[NSDate date] timeIntervalSince1970]];
+    
+    // Pad the long and lat with leading zeroes to reach ten characters
+    NSString *latitude = [NSString stringWithFormat:@"%010llu",[[Location sharedInstance] currentLat]];
+    NSString *longitude = [NSString stringWithFormat:@"%010llu",[[Location sharedInstance] currentLong]];
+    
+    NSLog(@"lat: %@, long: %@, ts: %@, message: %@",latitude,longitude,[timestamp stringValue],text);
+    SimpleDBPutAttributesRequest *putReq = [[SimpleDBPutAttributesRequest alloc]
+                                            initWithDomainName:@"wotw-simpledb"
+                                            andItemName:[[[UIDevice currentDevice] identifierForVendor] UUIDString]
+                                            andAttributes:nil];
+    [putReq addAttribute:[[SimpleDBReplaceableAttribute alloc] initWithName:@"timestamp" andValue:[timestamp stringValue] andReplace:NO]];
+    [putReq addAttribute:[[SimpleDBReplaceableAttribute alloc] initWithName:@"message" andValue:text andReplace:NO]];
+    [putReq addAttribute:[[SimpleDBReplaceableAttribute alloc] initWithName:@"long" andValue:longitude andReplace:YES]];
+    [putReq addAttribute:[[SimpleDBReplaceableAttribute alloc] initWithName:@"lat" andValue:latitude andReplace:YES]];
+    
+    // Send the put attributes request
+    @try {
+        SimpleDBPutAttributesResponse *putRsp = [sdbClient putAttributes:putReq];
+//        [sdbClient putAttributes:putReq];
+        NSLog(@"%@",putRsp);
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Exception : [%@]", exception);
+    }
 }
 
 
