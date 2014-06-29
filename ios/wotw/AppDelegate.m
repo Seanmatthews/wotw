@@ -7,12 +7,17 @@
 //
 
 #import "AppDelegate.h"
+#import "Location.h"
 
 @implementation AppDelegate
+
+const NSTimeInterval LOCATE_INTERVAL = 30.;
+const NSTimeInterval LOCATE_DURATION = 3.;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+    [[Location sharedInstance] startServiceWithInterval:LOCATE_INTERVAL andDuration:LOCATE_DURATION];
     return YES;
 }
 							

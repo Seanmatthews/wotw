@@ -45,6 +45,10 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="vXZ-lx-hvc" id="2Iy-XO-aCq"/>
+                                            <outlet property="delegate" destination="vXZ-lx-hvc" id="FUe-pd-mZu"/>
+                                        </connections>
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -86,6 +90,7 @@
                     </view>
                     <connections>
                         <outlet property="mapView" destination="K5V-bI-o39" id="Xdk-X9-lh3"/>
+                        <outlet property="tableView" destination="DJc-Ev-dkY" id="9h1-dS-7ag"/>
                         <outlet property="textField" destination="Yq7-v8-1HZ" id="Fsf-TX-7GL"/>
                         <outlet property="wallView" destination="IaC-K2-1je" id="ZcX-rJ-Mwn"/>
                     </connections>

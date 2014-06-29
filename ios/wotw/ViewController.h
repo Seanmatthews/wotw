@@ -16,6 +16,7 @@
 @property (nonatomic, strong) IBOutlet MKMapView *mapView;
 @property (nonatomic, strong) IBOutlet UIView *wallView;
 @property (nonatomic, strong) IBOutlet UITextField *textField;
+@property (nonatomic, strong) IBOutlet UITableView *tableView;
 
 - (IBAction)pressedMapButton:(id)sender;
 - (IBAction)pressedWallButton:(id)sender;
