@@ -24,6 +24,7 @@
 - (void)keyboardWasShown:(NSNotification*)aNotification;
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification;
 - (void)loadAnnotationsForRegion:(MKCoordinateRegion)region;
+- (void)refreshTable;
 
 @end
 
@@ -55,6 +56,7 @@ const double MESSAGES_RADIUS_METERS = 50.;
     _wallView.hidden = NO;
     _mapView.hidden = YES;
     keyboardIsVisible = NO;
+    [self refreshTable];
 }
 
 - (void)didReceiveMemoryWarning
@@ -175,7 +177,7 @@ const double MESSAGES_RADIUS_METERS = 50.;
 }
 
 // Fill the "model" with NSString messages
-- (void)refresh
+- (void)refreshTable
 {
     NSMutableArray *items = [self getFields:@"message" toDistance:[NSNumber numberWithDouble:MESSAGES_RADIUS_METERS]];
     messages = [[items valueForKey:@"attributes"] valueForKey:@"value"];
