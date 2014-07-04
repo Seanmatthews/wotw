@@ -10,6 +10,7 @@
 #import <AWSSimpleDB/AWSSimpleDB.h>
 #import "Location.h"
 #import "MessageAnnotationView.h"
+#import "MessageTableViewCell.h"
 
 
 @interface ViewController ()
@@ -33,6 +34,7 @@
 
 const long int TWO_WEEKS_SECONDS = 1209600;
 const double MESSAGES_RADIUS_METERS = 50.;
+const short MESSAGE_CHAR_LIMIT = 100;
 
 
 // This is called whenever the view is loaded through storyboard segues
@@ -93,6 +95,7 @@ const double MESSAGES_RADIUS_METERS = 50.;
 
 - (IBAction)pressedWallButton:(id)sender
 {
+    [self refreshTable];
     _wallView.hidden = NO;
     _mapView.hidden = YES;
 }
@@ -130,18 +133,6 @@ const double MESSAGES_RADIUS_METERS = 50.;
     [UIView commitAnimations];
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [textField resignFirstResponder];
-    NSString* text = [textField text];
-    if ([text length] > 0) {
-        [self writeMessageWithText:text];
-    }
-    [textField setText:@""];
-    [self refreshTable];
-    return YES;
-}
-
 // Get DB items by specifying select message and distance from user
 - (NSMutableArray*)getFields:(NSString*)fields toDistance:(NSNumber*)dist
 {
@@ -153,10 +144,10 @@ const double MESSAGES_RADIUS_METERS = 50.;
     CLLocationCoordinate2D cmax = [[array objectAtIndex:1] coordinate];
     
     // Pad with zeroes in the front until we have 10 characters, C style
-    NSString *minLat = [NSString stringWithFormat:@"%010d",(NSUInteger)((cmin.latitude + 400.) * 1000000.)];
-    NSString *maxLat = [NSString stringWithFormat:@"%010d",(NSUInteger)((cmax.latitude + 400.) * 1000000.)];
-    NSString *minLong = [NSString stringWithFormat:@"%010d",(NSUInteger)((cmin.longitude + 400.) * 1000000.)];
-    NSString *maxLong = [NSString stringWithFormat:@"%010d",(NSUInteger)((cmax.longitude + 400.) * 1000000.)];
+    NSString *minLat = [NSString stringWithFormat:@"%010lu",(unsigned long)((cmin.latitude + 400.) * 1000000.)];
+    NSString *maxLat = [NSString stringWithFormat:@"%010lu",(unsigned long)((cmax.latitude + 400.) * 1000000.)];
+    NSString *minLong = [NSString stringWithFormat:@"%010lu",(unsigned long)((cmin.longitude + 400.) * 1000000.)];
+    NSString *maxLong = [NSString stringWithFormat:@"%010lu",(unsigned long)((cmax.longitude + 400.) * 1000000.)];
 
 //    NSNumber *timestamp = [[NSNumber alloc] initWithLong:[[NSDate date] timeIntervalSince1970]];
 //    NSString *query = [NSString stringWithFormat:@"SELECT %@ FROM `wotw-simpledb` WHERE timestamp IS NOT NULL AND lat > '%@' AND lat < '%@' AND long > '%@' AND long < '%@' AND timestamp > '%d' ORDER BY timestamp ASC", fields, minLat, maxLat, minLong, maxLong, ([timestamp longValue] - TWO_WEEKS_SECONDS)];
@@ -172,7 +163,7 @@ const double MESSAGES_RADIUS_METERS = 50.;
         
         NSLog(@"client %@", sdbClient);
         SimpleDBSelectResponse *selectResponse = [sdbClient select:selectRequest];
-        NSLog(@"num messages: %d", selectResponse.items.count);
+        NSLog(@"num messages: %lu", (unsigned long)selectResponse.items.count);
         return selectResponse.items;
     }
     @catch (NSException *exception) {
@@ -185,13 +176,29 @@ const double MESSAGES_RADIUS_METERS = 50.;
 // Fill the "model" with NSString messages
 - (void)refreshTable
 {
+    // array of SimpleDBItem
     NSMutableArray *items = [self getFields:@"message" toDistance:[NSNumber numberWithDouble:MESSAGES_RADIUS_METERS]];
-    messages = [[items valueForKey:@"attributes"] valueForKey:@"value"];
+    
+    NSArray *anew = [[NSArray alloc] init];;
+    for (SimpleDBItem *item in items) {
+        NSMutableArray *attrs = [item attributes];
+        anew = [anew arrayByAddingObjectsFromArray:attrs];
+    }
+    messages = [anew valueForKey:@"value"];
     [_tableView reloadData];
+    
+    if (messages.count > 0) {
+        NSIndexPath* path = [NSIndexPath indexPathForRow:messages.count-1 inSection:0];
+        [_tableView scrollToRowAtIndexPath:path
+                          atScrollPosition:UITableViewScrollPositionBottom
+                                  animated:NO];
+    }
 }
 
 - (void)writeMessageWithText:(NSString*)text
 {
+    _charactersLeft.text = [NSString stringWithFormat:@"%d characters left", MESSAGE_CHAR_LIMIT];
+    
     // Add latitude & longitude
     NSNumber *timestamp = [[NSNumber alloc] initWithInteger:[[NSDate date] timeIntervalSince1970]];
     
@@ -221,6 +228,35 @@ const double MESSAGES_RADIUS_METERS = 50.;
 }
 
 
+#pragma mark - UITextFieldDelegate methods
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    if ([textField.text length] > 0) {
+        [self writeMessageWithText:textField.text];
+    }
+    [textField setText:@""];
+    [self refreshTable];
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string
+{
+    NSString *newString = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    if (newString.length >= MESSAGE_CHAR_LIMIT) {
+        // Send message automatically
+        [textField resignFirstResponder];
+        [self writeMessageWithText:textField.text];
+        [textField setText:@""];
+        [self refreshTable];
+    }
+    _charactersLeft.text = [NSString stringWithFormat:@"%d characters left",
+                            MESSAGE_CHAR_LIMIT - textField.text.length - string.length];
+    return YES;
+}
+
+
 #pragma mark - UITableViewDelegate methods
 
 - (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -230,7 +266,7 @@ const double MESSAGES_RADIUS_METERS = 50.;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 44.; // TODO: adjust
+    return 66.; // TODO: adjust
 }
 
 
@@ -251,20 +287,24 @@ const double MESSAGES_RADIUS_METERS = 50.;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     NSString *CellIdentifier = [NSString stringWithFormat:@"%ld_%ld",(long)indexPath.section,(long)indexPath.row];
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         // Try to changes the size and shape of the textLabel built into the UITableViewCell
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-        [cell setBackgroundColor:[UIColor clearColor]];
-        cell.textLabel.frame = CGRectMake(20, 0, 300, 44); // TODO: adjust
-        [cell.textLabel setBackgroundColor:[UIColor whiteColor]];
-        cell.textLabel.layer.cornerRadius = 15;
+        cell = [[MessageTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        cell.backgroundColor = [UIColor clearColor];
+        cell.editing = NO;
+        cell.textLabel.layer.cornerRadius = 10;
         cell.textLabel.layer.masksToBounds = YES;
-        cell.textLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        cell.textLabel.numberOfLines = 0;
-        cell.textLabel.font = [UIFont systemFontOfSize:13.];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
     }
-    cell.textLabel.text = messages[indexPath.row];
+    
+    NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+    style.firstLineHeadIndent = 4;
+    style.headIndent = 4;
+    style.lineBreakMode = NSLineBreakByWordWrapping;
+    style.alignment = NSTextAlignmentCenter;
+    cell.textLabel.attributedText = [[NSAttributedString alloc] initWithString:messages[indexPath.row]
+                                                                    attributes:@{NSParagraphStyleAttributeName: style}];
     return cell;
 }
 
@@ -315,5 +355,6 @@ const double MESSAGES_RADIUS_METERS = 50.;
         }
     }
 }
+
 
 @end

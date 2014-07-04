@@ -50,6 +50,13 @@
                                             <outlet property="delegate" destination="vXZ-lx-hvc" id="FUe-pd-mZu"/>
                                         </connections>
                                     </tableView>
+                                    <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="100 characters left" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="do4-4S-E7t">
+                                        <rect key="frame" x="20" y="493" width="280" height="25"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="0.25" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                 <constraints>
@@ -89,6 +96,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="charactersLeft" destination="do4-4S-E7t" id="1PQ-8r-LlT"/>
                         <outlet property="mapView" destination="K5V-bI-o39" id="Xdk-X9-lh3"/>
                         <outlet property="tableView" destination="DJc-Ev-dkY" id="9h1-dS-7ag"/>
                         <outlet property="textField" destination="Yq7-v8-1HZ" id="Fsf-TX-7GL"/>

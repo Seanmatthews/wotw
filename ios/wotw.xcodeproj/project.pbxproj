@@ -28,6 +28,7 @@
 		14D65776195FDE4000FF013A /* MessageAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D65775195FDE4000FF013A /* MessageAnnotationView.m */; };
 		14D65778195FFCB000FF013A /* AWSSimpleDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D65777195FFCB000FF013A /* AWSSimpleDB.framework */; };
 		14D6577C195FFEF800FF013A /* AWSRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D6577B195FFEF800FF013A /* AWSRuntime.framework */; };
+		14F19966196279500097DE54 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F19965196279500097DE54 /* MessageTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +71,8 @@
 		14D65777195FFCB000FF013A /* AWSSimpleDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSimpleDB.framework; path = "../apis/aws-ios-sdk-1.7.1/AWSSimpleDB.framework"; sourceTree = "<group>"; };
 		14D65779195FFCC800FF013A /* AWSSecurityTokenService.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSecurityTokenService.framework; path = "../apis/aws-ios-sdk-1.7.1/AWSSecurityTokenService.framework"; sourceTree = "<group>"; };
 		14D6577B195FFEF800FF013A /* AWSRuntime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSRuntime.framework; path = "../apis/aws-ios-sdk-1.7.1/AWSRuntime.framework"; sourceTree = "<group>"; };
+		14F19964196279500097DE54 /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewCell.h; sourceTree = "<group>"; };
+		14F19965196279500097DE54 /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,6 +146,8 @@
 				14D65774195FDE4000FF013A /* MessageAnnotationView.h */,
 				14D65775195FDE4000FF013A /* MessageAnnotationView.m */,
 				14D6576E195F743100FF013A /* Location.h */,
+				14F19964196279500097DE54 /* MessageTableViewCell.h */,
+				14F19965196279500097DE54 /* MessageTableViewCell.m */,
 				14D6576F195F743100FF013A /* Location.m */,
 				14D6570B195EB51A00FF013A /* AppDelegate.h */,
 				14D6570C195EB51A00FF013A /* AppDelegate.m */,
@@ -297,6 +302,7 @@
 				14D6570D195EB51A00FF013A /* AppDelegate.m in Sources */,
 				14D65709195EB51A00FF013A /* main.m in Sources */,
 				14D65776195FDE4000FF013A /* MessageAnnotationView.m in Sources */,
+				14F19966196279500097DE54 /* MessageTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
