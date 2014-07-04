@@ -28,6 +28,10 @@
 		14D65776195FDE4000FF013A /* MessageAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14D65775195FDE4000FF013A /* MessageAnnotationView.m */; };
 		14D65778195FFCB000FF013A /* AWSSimpleDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D65777195FFCB000FF013A /* AWSSimpleDB.framework */; };
 		14D6577C195FFEF800FF013A /* AWSRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14D6577B195FFEF800FF013A /* AWSRuntime.framework */; };
+		14EC7C821966A25C00E18AA3 /* brickwall.png in Resources */ = {isa = PBXBuildFile; fileRef = 14EC7C801966A25C00E18AA3 /* brickwall.png */; };
+		14EC7C831966A25C00E18AA3 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 14EC7C811966A25C00E18AA3 /* Icon.png */; };
+		14EC7C851966A46500E18AA3 /* defaultMapButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 14EC7C841966A46500E18AA3 /* defaultMapButton.png */; };
+		14EC7C881966ADDA00E18AA3 /* TabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EC7C871966ADDA00E18AA3 /* TabButton.m */; };
 		14F19966196279500097DE54 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F19965196279500097DE54 /* MessageTableViewCell.m */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +75,11 @@
 		14D65777195FFCB000FF013A /* AWSSimpleDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSimpleDB.framework; path = "../apis/aws-ios-sdk-1.7.1/AWSSimpleDB.framework"; sourceTree = "<group>"; };
 		14D65779195FFCC800FF013A /* AWSSecurityTokenService.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSecurityTokenService.framework; path = "../apis/aws-ios-sdk-1.7.1/AWSSecurityTokenService.framework"; sourceTree = "<group>"; };
 		14D6577B195FFEF800FF013A /* AWSRuntime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSRuntime.framework; path = "../apis/aws-ios-sdk-1.7.1/AWSRuntime.framework"; sourceTree = "<group>"; };
+		14EC7C801966A25C00E18AA3 /* brickwall.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = brickwall.png; path = media/brickwall.png; sourceTree = "<group>"; };
+		14EC7C811966A25C00E18AA3 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = media/Icon.png; sourceTree = "<group>"; };
+		14EC7C841966A46500E18AA3 /* defaultMapButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = defaultMapButton.png; path = media/defaultMapButton.png; sourceTree = "<group>"; };
+		14EC7C861966ADDA00E18AA3 /* TabButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabButton.h; sourceTree = "<group>"; };
+		14EC7C871966ADDA00E18AA3 /* TabButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabButton.m; sourceTree = "<group>"; };
 		14F19964196279500097DE54 /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewCell.h; sourceTree = "<group>"; };
 		14F19965196279500097DE54 /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -157,6 +166,8 @@
 				14D65714195EB51A00FF013A /* Images.xcassets */,
 				14D65737195EBD4600FF013A /* media */,
 				14D65703195EB51A00FF013A /* Supporting Files */,
+				14EC7C861966ADDA00E18AA3 /* TabButton.h */,
+				14EC7C871966ADDA00E18AA3 /* TabButton.m */,
 			);
 			path = wotw;
 			sourceTree = "<group>";
@@ -193,6 +204,9 @@
 		14D65737195EBD4600FF013A /* media */ = {
 			isa = PBXGroup;
 			children = (
+				14EC7C841966A46500E18AA3 /* defaultMapButton.png */,
+				14EC7C801966A25C00E18AA3 /* brickwall.png */,
+				14EC7C811966A25C00E18AA3 /* Icon.png */,
 			);
 			name = media;
 			sourceTree = "<group>";
@@ -276,9 +290,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14EC7C851966A46500E18AA3 /* defaultMapButton.png in Resources */,
 				14D65715195EB51A00FF013A /* Images.xcassets in Resources */,
 				14D65707195EB51A00FF013A /* InfoPlist.strings in Resources */,
+				14EC7C831966A25C00E18AA3 /* Icon.png in Resources */,
 				14D65710195EB51A00FF013A /* Main.storyboard in Resources */,
+				14EC7C821966A25C00E18AA3 /* brickwall.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -298,6 +315,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				14D65713195EB51A00FF013A /* ViewController.m in Sources */,
+				14EC7C881966ADDA00E18AA3 /* TabButton.m in Sources */,
 				14D65770195F743100FF013A /* Location.m in Sources */,
 				14D6570D195EB51A00FF013A /* AppDelegate.m in Sources */,
 				14D65709195EB51A00FF013A /* main.m in Sources */,

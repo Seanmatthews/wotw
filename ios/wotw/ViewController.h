@@ -10,6 +10,8 @@
 @import iAd;
 @import CoreLocation;
 @import MapKit;
+#import "TabButton.h"
+
 
 @interface ViewController : UIViewController <ADBannerViewDelegate, CLLocationManagerDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 
@@ -18,6 +20,8 @@
 @property (nonatomic, strong) IBOutlet UITextField *textField;
 @property (nonatomic, strong) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) IBOutlet UILabel *charactersLeft;
+@property (nonatomic, strong) IBOutlet TabButton *wallButton;
+@property (nonatomic, strong) IBOutlet TabButton *mapButton;
 
 - (IBAction)pressedMapButton:(id)sender;
 - (IBAction)pressedWallButton:(id)sender;

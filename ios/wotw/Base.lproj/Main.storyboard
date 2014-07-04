@@ -64,8 +64,8 @@
                                     <constraint firstAttribute="bottom" secondItem="Yq7-v8-1HZ" secondAttribute="bottom" constant="24" id="luz-dd-3fc"/>
                                 </constraints>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vco-jK-ddx">
-                                <rect key="frame" x="0.0" y="110" width="50" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vco-jK-ddx" customClass="TabButton">
+                                <rect key="frame" x="0.0" y="106" width="56" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="M">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -74,8 +74,8 @@
                                     <action selector="pressedMapButton:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="3fx-Hc-uDH"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Xs-Q2-aIg">
-                                <rect key="frame" x="0.0" y="58" width="50" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Xs-Q2-aIg" customClass="TabButton">
+                                <rect key="frame" x="0.0" y="50" width="56" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="L">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -97,9 +97,11 @@
                     </view>
                     <connections>
                         <outlet property="charactersLeft" destination="do4-4S-E7t" id="1PQ-8r-LlT"/>
+                        <outlet property="mapButton" destination="Vco-jK-ddx" id="J9p-RO-vUE"/>
                         <outlet property="mapView" destination="K5V-bI-o39" id="Xdk-X9-lh3"/>
                         <outlet property="tableView" destination="DJc-Ev-dkY" id="9h1-dS-7ag"/>
                         <outlet property="textField" destination="Yq7-v8-1HZ" id="Fsf-TX-7GL"/>
+                        <outlet property="wallButton" destination="1Xs-Q2-aIg" id="toJ-uv-dQ5"/>
                         <outlet property="wallView" destination="IaC-K2-1je" id="ZcX-rJ-Mwn"/>
                     </connections>
                 </viewController>

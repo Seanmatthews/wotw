@@ -11,6 +11,7 @@
 #import "Location.h"
 #import "MessageAnnotationView.h"
 #import "MessageTableViewCell.h"
+#import <QuartzCore/QuartzCore.h>
 
 
 @interface ViewController ()
@@ -27,6 +28,7 @@
 - (void)loadAnnotationsForRegion:(MKCoordinateRegion)region;
 - (void)refreshTable;
 - (void)writeMessageWithText:(NSString*)text;
+- (UIImage *)imageForButton:(UIButton *)button fromView:(UIView *)view;
 
 @end
 
@@ -42,7 +44,6 @@ const short MESSAGE_CHAR_LIMIT = 100;
 {
     if (self = [super initWithCoder:coder]) {
         // TODO: Use TVM
-        NSLog(@"CALLEDD");
         sdbClient = [[AmazonSimpleDBClient alloc]
                      initWithAccessKey:@"AKIAJ5UTQAKVNG2ZWGYA"
                      withSecretKey:@"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"];
@@ -52,11 +53,14 @@ const short MESSAGE_CHAR_LIMIT = 100;
     return self;
 }
 
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     [self registerForNotifications];
 	self.canDisplayBannerAds = YES;
+
+    _mapButton.bgImage = [UIImage imageNamed:@"defaultMapButton.png"];
     _wallView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"brickwall.png"]];
     _wallView.hidden = NO;
     _mapView.hidden = YES;
@@ -85,17 +89,30 @@ const short MESSAGE_CHAR_LIMIT = 100;
 
 - (IBAction)pressedMapButton:(id)sender
 {
-    _mapView.hidden = NO;
-    _wallView.hidden = YES;
     if (keyboardIsVisible) {
         [_textField setText:@""];
         [_textField resignFirstResponder];
     }
+    
+    // Only need to do this once to clear the initial background image
+    if (_mapButton.bgImage) {
+        _mapButton.bgImage = nil;
+        [_mapButton setNeedsDisplay];
+    }
+    
+    [_wallButton setBackgroundImage:[self imageForButton:_wallButton fromView:_wallView]
+                           forState:UIControlStateNormal];
+    [_mapButton setBackgroundImage:nil forState:UIControlStateNormal];
+    _mapView.hidden = NO;
+    _wallView.hidden = YES;
 }
 
 - (IBAction)pressedWallButton:(id)sender
 {
     [self refreshTable];
+    [_mapButton setBackgroundImage:[self imageForButton:_mapButton fromView:_mapView]
+                          forState:UIControlStateNormal];
+    [_wallButton setBackgroundImage:nil forState:UIControlStateNormal];
     _wallView.hidden = NO;
     _mapView.hidden = YES;
 }
@@ -355,6 +372,28 @@ const short MESSAGE_CHAR_LIMIT = 100;
         }
     }
 }
+
+
+#pragma mark - Button graphics
+
+- (UIImage *)imageForButton:(UIButton *)button fromView:(UIView *)view
+{
+    
+    UIGraphicsBeginImageContext(self.view.window.bounds.size);
+    [self.view.window.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    CGRect rect = [button convertRect:button.bounds toView:self.view];
+    NSLog(@"rect %f, %f, %f, %f",rect.origin.x,rect.origin.y,rect.size.width,rect.size.height);
+    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], rect);
+    UIImage *cropped = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    
+    return cropped;
+}
+
+
 
 
 @end
