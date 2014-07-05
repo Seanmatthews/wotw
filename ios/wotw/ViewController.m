@@ -28,7 +28,8 @@
 - (void)loadAnnotationsForRegion:(MKCoordinateRegion)region;
 - (void)refreshTable;
 - (void)writeMessageWithText:(NSString*)text;
-- (UIImage *)imageForButton:(UIButton *)button fromView:(UIView *)view;
+- (UIImage *)imageForButton:(UIButton *)button;
+- (UIImage *)cropImage:(UIImage *)image toRect:(CGRect)rect;
 
 @end
 
@@ -60,8 +61,9 @@ const short MESSAGE_CHAR_LIMIT = 100;
     [self registerForNotifications];
 	self.canDisplayBannerAds = YES;
 
+    UIImage *bgWall = [self cropImage:[UIImage imageNamed:@"brickwall.png"] toRect:_wallView.bounds];
     _mapButton.bgImage = [UIImage imageNamed:@"defaultMapButton.png"];
-    _wallView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"brickwall.png"]];
+    _wallView.backgroundColor = [UIColor colorWithPatternImage:bgWall];
     _wallView.hidden = NO;
     _mapView.hidden = YES;
     keyboardIsVisible = NO;
@@ -89,10 +91,10 @@ const short MESSAGE_CHAR_LIMIT = 100;
 
 - (IBAction)pressedMapButton:(id)sender
 {
-    if (keyboardIsVisible) {
-        [_textField setText:@""];
-        [_textField resignFirstResponder];
-    }
+//    if (keyboardIsVisible) {
+//        [_textField setText:@""];
+//        [_textField resignFirstResponder];
+//    }
     
     // Only need to do this once to clear the initial background image
     if (_mapButton.bgImage) {
@@ -100,7 +102,7 @@ const short MESSAGE_CHAR_LIMIT = 100;
         [_mapButton setNeedsDisplay];
     }
     
-    [_wallButton setBackgroundImage:[self imageForButton:_wallButton fromView:_wallView]
+    [_wallButton setBackgroundImage:[self imageForButton:_wallButton]
                            forState:UIControlStateNormal];
     [_mapButton setBackgroundImage:nil forState:UIControlStateNormal];
     _mapView.hidden = NO;
@@ -110,7 +112,7 @@ const short MESSAGE_CHAR_LIMIT = 100;
 - (IBAction)pressedWallButton:(id)sender
 {
     [self refreshTable];
-    [_mapButton setBackgroundImage:[self imageForButton:_mapButton fromView:_mapView]
+    [_mapButton setBackgroundImage:[self imageForButton:_mapButton]
                           forState:UIControlStateNormal];
     [_wallButton setBackgroundImage:nil forState:UIControlStateNormal];
     _wallView.hidden = NO;
@@ -376,9 +378,8 @@ const short MESSAGE_CHAR_LIMIT = 100;
 
 #pragma mark - Button graphics
 
-- (UIImage *)imageForButton:(UIButton *)button fromView:(UIView *)view
-{
-    
+- (UIImage *)imageForButton:(UIButton *)button
+{    
     UIGraphicsBeginImageContext(self.view.window.bounds.size);
     [self.view.window.layer renderInContext:UIGraphicsGetCurrentContext()];
     UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
@@ -393,7 +394,13 @@ const short MESSAGE_CHAR_LIMIT = 100;
     return cropped;
 }
 
-
+- (UIImage *)cropImage:(UIImage *)image toRect:(CGRect)rect
+{
+    CGImageRef imageRef = CGImageCreateWithImageInRect([image CGImage], rect);
+    UIImage *croppedImage = [UIImage imageWithCGImage:imageRef];
+    CGImageRelease(imageRef);
+    return croppedImage;
+}
 
 
 @end
