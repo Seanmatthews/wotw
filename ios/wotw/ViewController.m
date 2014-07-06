@@ -72,6 +72,12 @@ const short MESSAGE_CHAR_LIMIT = 100;
     keyboardIsVisible = NO;
     [self applyImageViewGradient];
     [self refreshTable];
+    
+    // Center map on user location & set tracking
+//    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance([[Location sharedInstance] currentLocation], 5000., 5000);
+//    [_mapView setRegion:region animated:YES];
+//    [_mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+//    [_mapView setCenterCoordinate:[[Location sharedInstance] currentLocation] animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
