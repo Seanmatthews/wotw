@@ -30,6 +30,7 @@
 - (void)writeMessageWithText:(NSString*)text;
 - (UIImage *)imageForButton:(UIButton *)button;
 - (UIImage *)cropImage:(UIImage *)image toRect:(CGRect)rect;
+- (void)applyImageViewGradient;
 
 @end
 
@@ -67,6 +68,7 @@ const short MESSAGE_CHAR_LIMIT = 100;
     _wallView.hidden = NO;
     _mapView.hidden = YES;
     keyboardIsVisible = NO;
+    [self applyImageViewGradient];
     [self refreshTable];
 }
 
@@ -400,6 +402,20 @@ const short MESSAGE_CHAR_LIMIT = 100;
     UIImage *croppedImage = [UIImage imageWithCGImage:imageRef];
     CGImageRelease(imageRef);
     return croppedImage;
+}
+
+- (void)applyImageViewGradient
+{
+    CAGradientLayer *l = [CAGradientLayer layer];
+    l.frame = _tabBarFadeView.bounds;
+    l.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:0 green:0 blue:0 alpha:0] CGColor],
+                (id)[[UIColor colorWithRed:0 green:0 blue:0 alpha:1] CGColor], nil];
+    
+    l.startPoint = CGPointMake(0.0f, 1.0f);
+    l.endPoint = CGPointMake(0.0f, 0.1f);
+    
+    //you can change the direction, obviously, this would be top to bottom fade
+    _tabBarFadeView.layer.mask = l;
 }
 
 

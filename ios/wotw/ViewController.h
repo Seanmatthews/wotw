@@ -22,6 +22,7 @@
 @property (nonatomic, strong) IBOutlet UILabel *charactersLeft;
 @property (nonatomic, strong) IBOutlet TabButton *wallButton;
 @property (nonatomic, strong) IBOutlet TabButton *mapButton;
+@property (nonatomic, strong) IBOutlet UIImageView *tabBarFadeView;
 
 - (IBAction)pressedMapButton:(id)sender;
 - (IBAction)pressedWallButton:(id)sender;
