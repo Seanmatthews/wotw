@@ -42,7 +42,6 @@
     
 //    if (_shadow) {
     // TODO try putting this in a separate area?
-        NSLog(@"SHADOW");
         CGContextSetLineWidth(context, 3.0);
         
         // Set stroke & shadow
