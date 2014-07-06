@@ -11,5 +11,6 @@
 @interface TabButton : UIButton
 
 @property (nonatomic, strong) UIImage *bgImage;
+@property (nonatomic) BOOL shadow;
 
 @end

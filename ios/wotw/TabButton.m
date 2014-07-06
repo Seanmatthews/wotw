@@ -23,6 +23,7 @@
     self = [super initWithFrame:frame];
     if (self) {
         _bgImage = nil;
+        _shadow = YES;
     }
     return self;
 }
@@ -35,16 +36,33 @@
     NSLog(@"draw rect");
     CGContextRef context = UIGraphicsGetCurrentContext();
 
-//    UIImage *image = [UIImage imageNamed:@"defaultMapButton.png"];
     [_bgImage drawInRect:self.bounds];
     
-    CGContextSetLineWidth(context, 5.0);
     CGColorSpaceRef colorspace = CGColorSpaceCreateDeviceRGB();
+    
+//    if (_shadow) {
+    // TODO try putting this in a separate area?
+        NSLog(@"SHADOW");
+        CGContextSetLineWidth(context, 3.0);
+        
+        // Set stroke & shadow
+        CGFloat shadowComponents[] = {0.0, 0.0, 0.0, 0.65};
+        CGColorRef darkShadow = CGColorCreate(colorspace, shadowComponents);
+        CGContextSetStrokeColorWithColor(context, darkShadow);
+    
+        // Draw this line against the view on top
+//        CGContextMoveToPoint(context, rect.size.width, 0);
+//        CGContextAddLineToPoint(context, rect.size.width, rect.size.height);
+//        CGContextStrokePath(context);
+    
+        CGContextSetShadowWithColor(context, CGSizeMake(2.0, 2.0), 0.5, darkShadow);
+//    }
+
+    // Reset stroke color & width
     CGFloat components[] = {0.5, 0.5, 0.5, 1.0};
     CGColorRef color = CGColorCreate(colorspace, components);
-    
     CGContextSetStrokeColorWithColor(context, color);
-    CGContextSetShadow(context, CGSizeMake(1.0, 1.0), 0.5);
+    CGContextSetLineWidth(context, 5.0);
     
     CGContextMoveToPoint(context, rect.size.width, 0);
     CGContextAddLineToPoint(context, 0, 0);

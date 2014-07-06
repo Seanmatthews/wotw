@@ -66,6 +66,8 @@ const short MESSAGE_CHAR_LIMIT = 100;
     _mapButton.bgImage = [UIImage imageNamed:@"defaultMapButton.png"];
     _wallView.backgroundColor = [UIColor colorWithPatternImage:bgWall];
     _wallView.hidden = NO;
+    _wallButton.shadow = NO;
+    _mapButton.shadow = YES;
     _mapView.hidden = YES;
     keyboardIsVisible = NO;
     [self applyImageViewGradient];
@@ -109,6 +111,11 @@ const short MESSAGE_CHAR_LIMIT = 100;
     [_mapButton setBackgroundImage:nil forState:UIControlStateNormal];
     _mapView.hidden = NO;
     _wallView.hidden = YES;
+    
+    _wallButton.shadow = YES;
+    [_wallButton setNeedsDisplay];
+    _mapButton.shadow = NO;
+    [_mapButton setNeedsDisplay];
 }
 
 - (IBAction)pressedWallButton:(id)sender
@@ -119,6 +126,11 @@ const short MESSAGE_CHAR_LIMIT = 100;
     [_wallButton setBackgroundImage:nil forState:UIControlStateNormal];
     _wallView.hidden = NO;
     _mapView.hidden = YES;
+    
+    _mapButton.shadow = YES;
+    [_mapButton setNeedsDisplay];
+    _wallButton.shadow = NO;
+    [_wallButton setNeedsDisplay];
 }
 
 // Called when the UIKeyboardDidShowNotification is sent.
