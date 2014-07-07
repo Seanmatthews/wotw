@@ -26,7 +26,7 @@
 - (void)keyboardWasShown:(NSNotification*)aNotification;
 - (void)keyboardWillBeHidden:(NSNotification*)aNotification;
 - (void)loadAnnotationsForRegion:(MKCoordinateRegion)region;
-- (void)refreshTable;
+- (void)refreshTable:(UIRefreshControl*)refreshControl;
 - (void)writeMessageWithText:(NSString*)text;
 - (UIImage *)imageForButton:(UIButton *)button;
 - (UIImage *)cropImage:(UIImage *)image toRect:(CGRect)rect;
@@ -61,6 +61,11 @@ const short MESSAGE_CHAR_LIMIT = 100;
     [super viewDidLoad];
     [self registerForNotifications];
 	self.canDisplayBannerAds = YES;
+    
+    // Setup the refresh control
+    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
+    [refreshControl addTarget:self action:@selector(refreshTable:) forControlEvents:UIControlEventValueChanged];
+    [self.tableView addSubview:refreshControl];
 
     UIImage *bgWall = [self cropImage:[UIImage imageNamed:@"brickwall.png"] toRect:_wallView.bounds];
     _mapButton.bgImage = [UIImage imageNamed:@"defaultMapButton.png"];
@@ -71,7 +76,7 @@ const short MESSAGE_CHAR_LIMIT = 100;
     _mapView.hidden = YES;
     keyboardIsVisible = NO;
     [self applyImageViewGradient];
-    [self refreshTable];
+    [self refreshTable:nil];
     
     // Center map on user location & set tracking
 //    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance([[Location sharedInstance] currentLocation], 5000., 5000);
@@ -126,7 +131,7 @@ const short MESSAGE_CHAR_LIMIT = 100;
 
 - (IBAction)pressedWallButton:(id)sender
 {
-    [self refreshTable];
+    [self refreshTable:nil];
     [_mapButton setBackgroundImage:[self imageForButton:_mapButton]
                           forState:UIControlStateNormal];
     [_wallButton setBackgroundImage:nil forState:UIControlStateNormal];
@@ -137,6 +142,11 @@ const short MESSAGE_CHAR_LIMIT = 100;
     [_mapButton setNeedsDisplay];
     _wallButton.shadow = NO;
     [_wallButton setNeedsDisplay];
+}
+
+- (IBAction)pressedRefreshButton:(id)sender
+{
+    [self refreshTable:nil];
 }
 
 // Called when the UIKeyboardDidShowNotification is sent.
@@ -213,10 +223,14 @@ const short MESSAGE_CHAR_LIMIT = 100;
 }
 
 // Fill the "model" with NSString messages
-- (void)refreshTable
+- (void)refreshTable:(UIRefreshControl *)refreshControl
 {
     // array of SimpleDBItem
     NSMutableArray *items = [self getFields:@"message" toDistance:[NSNumber numberWithDouble:MESSAGES_RADIUS_METERS]];
+    
+    if (refreshControl) {
+        [refreshControl endRefreshing];
+    }
     
     NSArray *anew = [[NSArray alloc] init];;
     for (SimpleDBItem *item in items) {
@@ -276,7 +290,7 @@ const short MESSAGE_CHAR_LIMIT = 100;
         [self writeMessageWithText:textField.text];
     }
     [textField setText:@""];
-    [self refreshTable];
+    [self refreshTable:nil];
     return YES;
 }
 
@@ -288,7 +302,7 @@ const short MESSAGE_CHAR_LIMIT = 100;
         [textField resignFirstResponder];
         [self writeMessageWithText:textField.text];
         [textField setText:@""];
-        [self refreshTable];
+        [self refreshTable:nil];
     }
     _charactersLeft.text = [NSString stringWithFormat:@"%d characters left",
                             MESSAGE_CHAR_LIMIT - textField.text.length - string.length];

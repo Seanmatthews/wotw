@@ -26,5 +26,6 @@
 
 - (IBAction)pressedMapButton:(id)sender;
 - (IBAction)pressedWallButton:(id)sender;
+- (IBAction)pressedRefreshButton:(id)sender;
 
 @end

@@ -32,6 +32,7 @@
 		14EC7C831966A25C00E18AA3 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 14EC7C811966A25C00E18AA3 /* Icon.png */; };
 		14EC7C851966A46500E18AA3 /* defaultMapButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 14EC7C841966A46500E18AA3 /* defaultMapButton.png */; };
 		14EC7C881966ADDA00E18AA3 /* TabButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 14EC7C871966ADDA00E18AA3 /* TabButton.m */; };
+		14EC7C8A196A339F00E18AA3 /* refresh.png in Resources */ = {isa = PBXBuildFile; fileRef = 14EC7C89196A339F00E18AA3 /* refresh.png */; };
 		14F19966196279500097DE54 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 14F19965196279500097DE54 /* MessageTableViewCell.m */; };
 /* End PBXBuildFile section */
 
@@ -80,6 +81,7 @@
 		14EC7C841966A46500E18AA3 /* defaultMapButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = defaultMapButton.png; path = media/defaultMapButton.png; sourceTree = "<group>"; };
 		14EC7C861966ADDA00E18AA3 /* TabButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TabButton.h; sourceTree = "<group>"; };
 		14EC7C871966ADDA00E18AA3 /* TabButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TabButton.m; sourceTree = "<group>"; };
+		14EC7C89196A339F00E18AA3 /* refresh.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = refresh.png; path = media/refresh.png; sourceTree = "<group>"; };
 		14F19964196279500097DE54 /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewCell.h; sourceTree = "<group>"; };
 		14F19965196279500097DE54 /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -204,6 +206,7 @@
 		14D65737195EBD4600FF013A /* media */ = {
 			isa = PBXGroup;
 			children = (
+				14EC7C89196A339F00E18AA3 /* refresh.png */,
 				14EC7C841966A46500E18AA3 /* defaultMapButton.png */,
 				14EC7C801966A25C00E18AA3 /* brickwall.png */,
 				14EC7C811966A25C00E18AA3 /* Icon.png */,
@@ -293,6 +296,7 @@
 				14EC7C851966A46500E18AA3 /* defaultMapButton.png in Resources */,
 				14D65715195EB51A00FF013A /* Images.xcassets in Resources */,
 				14D65707195EB51A00FF013A /* InfoPlist.strings in Resources */,
+				14EC7C8A196A339F00E18AA3 /* refresh.png in Resources */,
 				14EC7C831966A25C00E18AA3 /* Icon.png in Resources */,
 				14D65710195EB51A00FF013A /* Main.storyboard in Resources */,
 				14EC7C821966A25C00E18AA3 /* brickwall.png in Resources */,
