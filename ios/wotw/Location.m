@@ -35,7 +35,7 @@ static const double MILES_METERS = 1609.34;
         // It ultimately determines how the manager will attempt to
         // acquire location and thus, the amount of power that
         // will be consumed.
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest;//[[setupInfo objectForKey:kSetupInfoKeyAccuracy] doubleValue];
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters; //kCLLocationAccuracyBest;//[[setupInfo objectForKey:kSetupInfoKeyAccuracy] doubleValue];
         
         _currentLocation = CLLocationCoordinate2DMake([Location fromLongLong:_currentLat], [Location fromLongLong:_currentLong]);
     }
@@ -51,6 +51,11 @@ static const double MILES_METERS = 1609.34;
         // Additional initialization can go here
     });
     return _sharedObject;
+}
+
+- (void)startService
+{
+    [locationManager startUpdatingLocation];
 }
 
 - (void)startServiceWithInterval:(NSTimeInterval)interval andDuration:(NSTimeInterval)duration
@@ -71,7 +76,10 @@ static const double MILES_METERS = 1609.34;
 
 - (void)stopService
 {
-    dispatch_suspend(timerSource);
+    if (timerSource) {
+        dispatch_suspend(timerSource);
+    }
+    [locationManager stopUpdatingLocation];
 }
 
 
@@ -83,6 +91,7 @@ static const double MILES_METERS = 1609.34;
     _currentLocation = [(CLLocation*)[locations lastObject] coordinate];
     _currentLat = [Location toLongLong:_currentLocation.latitude];
     _currentLong = [Location toLongLong:_currentLocation.longitude];
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationUpdateNotification" object:self];
 }
 
 

@@ -16,14 +16,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="xy9-56-hEc">
+                            <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="xy9-56-hEc">
                                 <rect key="frame" x="0.0" y="518" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="r57-TA-X1U"/>
                                 </connections>
                             </adBannerView>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="K5V-bI-o39">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="K5V-bI-o39">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </mapView>
@@ -108,10 +108,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="xy9-56-hEc" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="0s1-hm-zMy"/>
-                            <constraint firstItem="xy9-56-hEc" firstAttribute="top" secondItem="K5V-bI-o39" secondAttribute="bottom" id="3Vv-SA-hK4"/>
-                            <constraint firstAttribute="bottom" secondItem="xy9-56-hEc" secondAttribute="bottom" id="5aA-mu-TeC"/>
-                            <constraint firstItem="xy9-56-hEc" firstAttribute="top" secondItem="IaC-K2-1je" secondAttribute="bottom" id="635-9M-tgE"/>
-                            <constraint firstItem="xy9-56-hEc" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="518" id="fsS-Bf-mT2"/>
                             <constraint firstAttribute="trailing" secondItem="xy9-56-hEc" secondAttribute="trailing" id="jgq-pp-IR2"/>
                         </constraints>
                     </view>

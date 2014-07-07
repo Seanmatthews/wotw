@@ -31,6 +31,7 @@
 - (UIImage *)imageForButton:(UIButton *)button;
 - (UIImage *)cropImage:(UIImage *)image toRect:(CGRect)rect;
 - (void)applyImageViewGradient;
+- (void)receivedFirstLocation;
 
 @end
 
@@ -62,6 +63,8 @@ const short MESSAGE_CHAR_LIMIT = 100;
     [self registerForNotifications];
 	self.canDisplayBannerAds = YES;
     
+    [_mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
+    
     // Setup the refresh control
     UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
     [refreshControl addTarget:self action:@selector(refreshTable:) forControlEvents:UIControlEventValueChanged];
@@ -76,13 +79,6 @@ const short MESSAGE_CHAR_LIMIT = 100;
     _mapView.hidden = YES;
     keyboardIsVisible = NO;
     [self applyImageViewGradient];
-    [self refreshTable:nil];
-    
-    // Center map on user location & set tracking
-//    MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance([[Location sharedInstance] currentLocation], 5000., 5000);
-//    [_mapView setRegion:region animated:YES];
-//    [_mapView setUserTrackingMode:MKUserTrackingModeFollow animated:YES];
-//    [_mapView setCenterCoordinate:[[Location sharedInstance] currentLocation] animated:YES];
 }
 
 - (void)didReceiveMemoryWarning
@@ -93,6 +89,11 @@ const short MESSAGE_CHAR_LIMIT = 100;
 
 - (void)registerForNotifications
 {
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(receivedFirstLocation)
+                                                 name:@"LocationUpdateNotification"
+                                               object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
                                                  name:UIKeyboardWillShowNotification
@@ -209,10 +210,8 @@ const short MESSAGE_CHAR_LIMIT = 100;
     @try {
         SimpleDBSelectRequest *selectRequest = [[SimpleDBSelectRequest alloc] initWithSelectExpression:query];
         selectRequest.consistentRead = YES;
-        
-        NSLog(@"client %@", sdbClient);
         SimpleDBSelectResponse *selectResponse = [sdbClient select:selectRequest];
-        NSLog(@"num messages: %lu", (unsigned long)selectResponse.items.count);
+//        NSLog(@"num messages: %lu", (unsigned long)selectResponse.items.count);
         return selectResponse.items;
     }
     @catch (NSException *exception) {
@@ -238,6 +237,7 @@ const short MESSAGE_CHAR_LIMIT = 100;
         anew = [anew arrayByAddingObjectsFromArray:attrs];
     }
     messages = [anew valueForKey:@"value"];
+    NSLog(@"num messages %d", messages.count);
     [_tableView reloadData];
     
     if (messages.count > 0) {
@@ -278,6 +278,15 @@ const short MESSAGE_CHAR_LIMIT = 100;
     @catch (NSException *exception) {
         NSLog(@"Exception : [%@]", exception);
     }
+}
+
+- (void)receivedFirstLocation
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"LocationUpdateNotification" object:nil];
+    [self refreshTable:nil];
+    
+    // Center map on user location & set tracking
+    [_mapView setCenterCoordinate:[[Location sharedInstance] currentLocation] animated:YES];
 }
 
 
@@ -339,7 +348,8 @@ const short MESSAGE_CHAR_LIMIT = 100;
 // It is not for filling in cell data.
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSString *CellIdentifier = [NSString stringWithFormat:@"%ld_%ld",(long)indexPath.section,(long)indexPath.row];
+//    NSString *CellIdentifier = [NSString stringWithFormat:@"%ld_%ld",(long)indexPath.section,(long)indexPath.row];
+    NSString *CellIdentifier = @"CellIdentifier";
     MessageTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         // Try to changes the size and shape of the textLabel built into the UITableViewCell

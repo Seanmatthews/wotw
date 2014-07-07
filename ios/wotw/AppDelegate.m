@@ -17,7 +17,7 @@ const NSTimeInterval LOCATE_DURATION = 3.;
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    [[Location sharedInstance] startServiceWithInterval:LOCATE_INTERVAL andDuration:LOCATE_DURATION];
+    [[Location sharedInstance] startService];
     return YES;
 }
 							

@@ -17,6 +17,7 @@
 @property (atomic) CLLocationCoordinate2D currentLocation;
 
 - (id)init;
+- (void)startService;
 - (void)startServiceWithInterval:(NSTimeInterval)interval andDuration:(NSTimeInterval)duration;
 - (void)stopService;
 - (CGFloat)milesToCurrentLocationFrom:(CLLocationCoordinate2D)coords;
