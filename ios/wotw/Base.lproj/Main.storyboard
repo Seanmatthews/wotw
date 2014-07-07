@@ -17,18 +17,18 @@
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <adBannerView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" translatesAutoresizingMaskIntoConstraints="NO" id="xy9-56-hEc">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="518" width="320" height="50"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                 <connections>
                                     <outlet property="delegate" destination="vXZ-lx-hvc" id="r57-TA-X1U"/>
                                 </connections>
                             </adBannerView>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="K5V-bI-o39">
-                                <rect key="frame" x="0.0" y="50" width="320" height="518"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                             </mapView>
                             <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IaC-K2-1je">
-                                <rect key="frame" x="0.0" y="50" width="320" height="518"/>
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="518"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="line" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Yq7-v8-1HZ">
@@ -65,7 +65,7 @@
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vco-jK-ddx" customClass="TabButton">
-                                <rect key="frame" x="0.0" y="106" width="56" height="56"/>
+                                <rect key="frame" x="0.0" y="76" width="56" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title=" ">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -75,7 +75,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Xs-Q2-aIg" customClass="TabButton">
-                                <rect key="frame" x="0.0" y="50" width="56" height="56"/>
+                                <rect key="frame" x="0.0" y="20" width="56" height="56"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title=" ">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -85,19 +85,24 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bkk-Ra-DOo">
-                                <rect key="frame" x="0.0" y="162" width="56" height="28"/>
+                                <rect key="frame" x="0.0" y="132" width="56" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.50364716198979598" green="0.50364716198979598" blue="0.50364716198979598" alpha="1" colorSpace="calibratedRGB"/>
+                            </imageView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gl1-LK-owd">
+                                <rect key="frame" x="0.0" y="0.0" width="56" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.5005580357142857" green="0.5005580357142857" blue="0.5005580357142857" alpha="1" colorSpace="calibratedRGB"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="IaC-K2-1je" firstAttribute="top" secondItem="xy9-56-hEc" secondAttribute="bottom" id="0VW-Xr-DWA"/>
-                            <constraint firstAttribute="bottom" secondItem="xy9-56-hEc" secondAttribute="bottom" constant="518" id="0dP-HK-Imt"/>
                             <constraint firstItem="xy9-56-hEc" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="0s1-hm-zMy"/>
-                            <constraint firstItem="xy9-56-hEc" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="Dz7-Gb-xPn"/>
+                            <constraint firstItem="xy9-56-hEc" firstAttribute="top" secondItem="K5V-bI-o39" secondAttribute="bottom" id="3Vv-SA-hK4"/>
+                            <constraint firstAttribute="bottom" secondItem="xy9-56-hEc" secondAttribute="bottom" id="5aA-mu-TeC"/>
+                            <constraint firstItem="xy9-56-hEc" firstAttribute="top" secondItem="IaC-K2-1je" secondAttribute="bottom" id="635-9M-tgE"/>
+                            <constraint firstItem="xy9-56-hEc" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="518" id="fsS-Bf-mT2"/>
                             <constraint firstAttribute="trailing" secondItem="xy9-56-hEc" secondAttribute="trailing" id="jgq-pp-IR2"/>
-                            <constraint firstItem="K5V-bI-o39" firstAttribute="top" secondItem="xy9-56-hEc" secondAttribute="bottom" id="stw-Df-hSN"/>
                         </constraints>
                     </view>
                     <connections>
