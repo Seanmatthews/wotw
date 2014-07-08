@@ -1,9 +1,9 @@
 //
 //  Location.h
-//  chatter
+//  wotw
 //
-//  Created by sean matthews on 11/2/13.
-//  Copyright (c) 2013 rowboat entertainment. All rights reserved.
+//  Created by sean matthews on 7/7/14.
+//  Copyright (c) 2014 Rowboat Entertainment. All rights reserved.
 //
 
 @import Foundation;
@@ -18,7 +18,6 @@
 
 - (id)init;
 - (void)startService;
-- (void)startServiceWithInterval:(NSTimeInterval)interval andDuration:(NSTimeInterval)duration;
 - (void)stopService;
 - (CGFloat)milesToCurrentLocationFrom:(CLLocationCoordinate2D)coords;
 - (NSUInteger)metersToCurrentLocationFrom:(CLLocationCoordinate2D)coords;

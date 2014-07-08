@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "14D656F8195EB51A00FF013A"
+               BlueprintIdentifier = "1406E712196B751100042DF8"
                BuildableName = "wotw.app"
                BlueprintName = "wotw"
                ReferencedContainer = "container:wotw.xcodeproj">
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "14D65719195EB51A00FF013A"
+               BlueprintIdentifier = "1406E736196B751100042DF8"
                BuildableName = "wotwTests.xctest"
                BlueprintName = "wotwTests"
                ReferencedContainer = "container:wotw.xcodeproj">
@@ -42,7 +42,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "14D656F8195EB51A00FF013A"
+            BlueprintIdentifier = "1406E712196B751100042DF8"
             BuildableName = "wotw.app"
             BlueprintName = "wotw"
             ReferencedContainer = "container:wotw.xcodeproj">
@@ -61,7 +61,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "14D656F8195EB51A00FF013A"
+            BlueprintIdentifier = "1406E712196B751100042DF8"
             BuildableName = "wotw.app"
             BlueprintName = "wotw"
             ReferencedContainer = "container:wotw.xcodeproj">
@@ -79,7 +79,7 @@
       <BuildableProductRunnable>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "14D656F8195EB51A00FF013A"
+            BlueprintIdentifier = "1406E712196B751100042DF8"
             BuildableName = "wotw.app"
             BlueprintName = "wotw"
             ReferencedContainer = "container:wotw.xcodeproj">

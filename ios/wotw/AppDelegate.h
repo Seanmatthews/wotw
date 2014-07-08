@@ -2,14 +2,16 @@
 //  AppDelegate.h
 //  wotw
 //
-//  Created by sean matthews on 6/28/14.
+//  Created by sean matthews on 7/7/14.
 //  Copyright (c) 2014 Rowboat Entertainment. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
+@import iAd;
 
-@interface AppDelegate : UIResponder <UIApplicationDelegate>
+@interface AppDelegate : UIResponder <UIApplicationDelegate, ADBannerViewDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
+//@property (strong, nonatomic) IBOutlet ADBannerView *adView;
 
 @end

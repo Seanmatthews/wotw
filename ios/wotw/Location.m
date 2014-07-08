@@ -1,9 +1,9 @@
 //
 //  Location.m
-//  chatter
+//  wotw
 //
-//  Created by sean matthews on 11/2/13.
-//  Copyright (c) 2013 rowboat entertainment. All rights reserved.
+//  Created by sean matthews on 7/7/14.
+//  Copyright (c) 2014 Rowboat Entertainment. All rights reserved.
 //
 
 #import "Location.h"
@@ -58,30 +58,10 @@ static const double MILES_METERS = 1609.34;
     [locationManager startUpdatingLocation];
 }
 
-- (void)startServiceWithInterval:(NSTimeInterval)interval andDuration:(NSTimeInterval)duration
-{
-    backgroundQueue = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
-    timerSource = dispatch_source_create(DISPATCH_SOURCE_TYPE_TIMER, 0, 0, backgroundQueue);
-    dispatch_source_set_timer(timerSource, dispatch_time(DISPATCH_TIME_NOW, 0), 10.0*NSEC_PER_SEC, 0*NSEC_PER_SEC);
-    dispatch_source_set_event_handler(timerSource, ^{
-        
-        [locationManager startUpdatingLocation];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, duration * NSEC_PER_SEC), backgroundQueue, ^{
-            [locationManager stopUpdatingLocation];
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"LocationUpdateNotification" object:self];
-        });
-    });
-    dispatch_resume(timerSource);
-}
-
 - (void)stopService
 {
-    if (timerSource) {
-        dispatch_suspend(timerSource);
-    }
     [locationManager stopUpdatingLocation];
 }
-
 
 
 #pragma mark - CoreLocation functions
@@ -163,10 +143,10 @@ static const double MILES_METERS = 1609.34;
                                                                     [dist doubleValue]);
     CLLocation *minCoords = [[CLLocation alloc]
                              initWithLatitude:(region.center.latitude - region.span.latitudeDelta)
-                                    longitude:(region.center.longitude - region.span.longitudeDelta)];
+                             longitude:(region.center.longitude - region.span.longitudeDelta)];
     CLLocation *maxCoords = [[CLLocation alloc]
                              initWithLatitude:(region.center.latitude + region.span.latitudeDelta)
-                                    longitude:(region.center.longitude + region.span.longitudeDelta)];
+                             longitude:(region.center.longitude + region.span.longitudeDelta)];
     
     return [NSArray arrayWithObjects:minCoords, maxCoords, nil];
 }
@@ -186,3 +166,4 @@ static const double MILES_METERS = 1609.34;
 
 
 @end
+

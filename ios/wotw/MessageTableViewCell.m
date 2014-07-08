@@ -33,8 +33,10 @@
 
 - (void)layoutSubviews {
     [super layoutSubviews];
-    self.textLabel.frame = CGRectMake(65, 2, 245, self.textLabel.frame.size.height-4);
-//    self.textLabel.frame = CGRectMake(10, 2, 300, self.textLabel.frame.size.height-4);
+    self.editing = NO;
+    self.backgroundColor = [UIColor clearColor];
+    self.selectionStyle = UITableViewCellSelectionStyleNone;
+    self.textLabel.frame = CGRectMake(58, 2, 242, self.textLabel.frame.size.height-4);
     self.textLabel.layer.cornerRadius = 10;
     self.textLabel.layer.masksToBounds = YES;
     self.textLabel.lineBreakMode = NSLineBreakByWordWrapping;

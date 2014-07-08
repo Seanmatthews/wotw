@@ -2,7 +2,7 @@
 //  AppDelegate.m
 //  wotw
 //
-//  Created by sean matthews on 6/28/14.
+//  Created by sean matthews on 7/7/14.
 //  Copyright (c) 2014 Rowboat Entertainment. All rights reserved.
 //
 
@@ -10,15 +10,66 @@
 #import "Location.h"
 
 @implementation AppDelegate
+{
+    ADBannerView *adView;
+}
 
-const NSTimeInterval LOCATE_INTERVAL = 30.;
-const NSTimeInterval LOCATE_DURATION = 3.;
+const NSUInteger TABBAR_HEIGHT = 49;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
+//    self.window.rootViewController.canDisplayBannerAds = YES;
     [[Location sharedInstance] startService];
+    
+    adView = [[ADBannerView alloc] initWithFrame:CGRectMake(0,469,320,50)];
+    adView.delegate = self;
+    [self.window.rootViewController.view addSubview:adView];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWasShown:)
+                                                 name:UIKeyboardWillShowNotification
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillBeHidden:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:nil];
+    
     return YES;
+}
+
+// Called when the UIKeyboardDidShowNotification is sent.
+- (void)keyboardWasShown:(NSNotification*)aNotification
+{
+    //    keyboardIsVisible = YES;
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    // Animate the current view out of the way
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
+    CGRect rect = adView.frame;
+    rect.origin.y -= kbSize.height - TABBAR_HEIGHT;
+    adView.frame = rect;
+    
+    [UIView commitAnimations];
+}
+
+// Called when the UIKeyboardWillHideNotification is sent
+- (void)keyboardWillBeHidden:(NSNotification*)aNotification
+{
+    //    keyboardIsVisible = NO;
+    NSDictionary* info = [aNotification userInfo];
+    CGSize kbSize = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+    
+    // Animate the current view back to where it was
+    [UIView beginAnimations:nil context:NULL];
+    [UIView setAnimationDuration:0.3]; // if you want to slide up the view
+    CGRect rect = adView.frame;
+    rect.origin.y += kbSize.height - TABBAR_HEIGHT;
+    adView.frame = rect;
+    [UIView commitAnimations];
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application
