@@ -26,6 +26,7 @@
 
 static int const PrivateKVOContextOne;
 const NSUInteger TABBAR_HEIGHT = 49;
+const short MESSAGE_CHAR_LIMIT = 100;
 
 
 - (void)viewDidLoad
@@ -194,10 +195,24 @@ const NSUInteger TABBAR_HEIGHT = 49;
         // Send message to server
         [[MessageRepo sharedInstance] writeOnWall:text];
     }
+    _charactersLeftLabel.text = [NSString stringWithFormat:@"%d characters left", MESSAGE_CHAR_LIMIT];
     [textField setText:@""];
     [textField resignFirstResponder];
     [self refreshTable:nil];
+    
     return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    NSUInteger newLength = [textField.text length] + [string length] - range.length;
+    BOOL shouldChange = (newLength > MESSAGE_CHAR_LIMIT) ? NO : YES;
+    
+    if (shouldChange) {
+        _charactersLeftLabel.text = [NSString stringWithFormat:@"%d characters left",
+                                     MESSAGE_CHAR_LIMIT - newLength];
+    }
+    
+    return shouldChange;
 }
 
 
