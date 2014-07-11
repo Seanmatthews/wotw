@@ -19,6 +19,7 @@
 - (void)receivedFirstLocation;
 - (void)reloadMapAnnotations;
 - (void)addAnnotationWithMessage:(NSString*)message atCoord:(CLLocationCoordinate2D)coord;
+- (void)centerOnUserWithLatDelta:(CGFloat)d1 longDelta:(CGFloat)d2;
 
 @end
 
@@ -31,7 +32,9 @@ static int const PrivateKVOContextTwo;
 {
     [super viewDidLoad];
 	[self registerForNotifications];
-    _mapView.showsUserLocation = YES;
+    _mapView.userTrackingMode = MKUserTrackingModeFollow;
+    [self centerOnUserWithLatDelta:0.2 longDelta:0.2];
+    
     visibleAnnotationCount = 0;
 }
 
@@ -93,7 +96,6 @@ static int const PrivateKVOContextTwo;
 
 - (IBAction)pressedLocateButton:(id)sender
 {
-    // TODO change zoom back to default region?
     [_mapView setCenterCoordinate:[[Location sharedInstance] currentLocation] animated:YES];
 }
 
@@ -107,29 +109,49 @@ static int const PrivateKVOContextTwo;
 
 }
 
-
-// TODO need this??? This method only customizes the pin
-- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id < MKAnnotation >)annotation
+- (void)centerOnUserWithLatDelta:(CGFloat)d1 longDelta:(CGFloat)d2
 {
-    MKPinAnnotationView *annotationView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"AnnotationView"];
-    if (annotationView) {
-        annotationView.annotation = annotation;
-    }
-    else {
-        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
-                                                         reuseIdentifier:@"AnnotationView"];
-    }
-    annotationView.canShowCallout = YES;
-    
-//    visibleAnnotationCount = 0;
-//    for (MKPointAnnotation *annotation in _mapView.annotations) {
-//        if (MKMapRectContainsPoint(_mapView.visibleMapRect, MKMapPointForCoordinate(annotation.coordinate))) {
-//            visibleAnnotationCount++;
-//        }
-//    }
-    
-    return annotationView;
+    MKCoordinateRegion mapRegion;
+    mapRegion.center = [[Location sharedInstance] currentLocation];
+    mapRegion.span.latitudeDelta = d1;
+    mapRegion.span.longitudeDelta = d2;
+
+    [_mapView setRegion:mapRegion animated: YES];
 }
+
+//-(void)mapView:(MKMapView *)mapView didUpdateUserLocation:(MKUserLocation *)userLocation
+//{
+//    MKCoordinateRegion mapRegion;
+//    mapRegion.center = mapView.userLocation.coordinate;
+//    mapRegion.span.latitudeDelta = 0.2;
+//    mapRegion.span.longitudeDelta = 0.2;
+//    
+//    [mapView setRegion:mapRegion animated: YES];
+//}
+
+
+//// TODO need this??? This method only customizes the pin
+//- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id < MKAnnotation >)annotation
+//{
+//    MKPinAnnotationView *annotationView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"AnnotationView"];
+//    if (annotationView) {
+//        annotationView.annotation = annotation;
+//    }
+//    else {
+//        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
+//                                                         reuseIdentifier:@"AnnotationView"];
+//    }
+//    annotationView.canShowCallout = YES;
+//    
+////    visibleAnnotationCount = 0;
+////    for (MKPointAnnotation *annotation in _mapView.annotations) {
+////        if (MKMapRectContainsPoint(_mapView.visibleMapRect, MKMapPointForCoordinate(annotation.coordinate))) {
+////            visibleAnnotationCount++;
+////        }
+////    }
+//    
+//    return annotationView;
+//}
 
 // TODO Need this??? Might need it to show a custom callout view
 //- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
@@ -143,6 +165,8 @@ static int const PrivateKVOContextTwo;
 - (void)addAnnotationWithMessage:(NSString*)message atCoord:(CLLocationCoordinate2D)coord
 {
     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    annotation.title = @".";
+    annotation.subtitle = message;
     annotation.coordinate = coord;
     
     // TODO add message to mkpointannotation ???
