@@ -8,8 +8,16 @@
 
 @import UIKit;
 @import MapKit;
+#import "CustomAnnotation.h"
+#import "BasicMapAnnotation.h"
 
-@interface SecondViewController : UIViewController <MKMapViewDelegate>
+@interface SecondViewController : UIViewController <MKMapViewDelegate, UIGestureRecognizerDelegate>
+{
+    CustomAnnotation *_calloutAnnotation;
+	MKAnnotationView *_selectedAnnotationView;
+    BasicMapAnnotation *_customAnnotation;
+	BasicMapAnnotation *_normalAnnotation;
+}
 
 @property (nonatomic, strong) IBOutlet MKMapView *mapView;
 

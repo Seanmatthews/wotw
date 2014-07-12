@@ -36,6 +36,9 @@
 		1406E769196BE95F00042DF8 /* bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 1406E768196BE95F00042DF8 /* bubble.png */; };
 		1406E76B196BE9CB00042DF8 /* location_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 1406E76A196BE9CB00042DF8 /* location_pointer.png */; };
 		1406E76D196BEA6500042DF8 /* refresh-outlined.png in Resources */ = {isa = PBXBuildFile; fileRef = 1406E76C196BEA6500042DF8 /* refresh-outlined.png */; };
+		14847BC21971BED200E52AF2 /* CustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 14847BC11971BED200E52AF2 /* CustomAnnotation.m */; };
+		14847BCA1971E67400E52AF2 /* CalloutMapAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14847BC91971E67400E52AF2 /* CalloutMapAnnotationView.m */; };
+		14847BCD1971E83400E52AF2 /* BasicMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 14847BCC1971E83400E52AF2 /* BasicMapAnnotation.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -87,6 +90,12 @@
 		1406E768196BE95F00042DF8 /* bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bubble.png; path = media/bubble.png; sourceTree = "<group>"; };
 		1406E76A196BE9CB00042DF8 /* location_pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = location_pointer.png; path = media/location_pointer.png; sourceTree = "<group>"; };
 		1406E76C196BEA6500042DF8 /* refresh-outlined.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "refresh-outlined.png"; path = "media/refresh-outlined.png"; sourceTree = "<group>"; };
+		14847BC01971BED200E52AF2 /* CustomAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotation.h; sourceTree = "<group>"; };
+		14847BC11971BED200E52AF2 /* CustomAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotation.m; sourceTree = "<group>"; };
+		14847BC81971E67400E52AF2 /* CalloutMapAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CalloutMapAnnotationView.h; sourceTree = "<group>"; };
+		14847BC91971E67400E52AF2 /* CalloutMapAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalloutMapAnnotationView.m; sourceTree = "<group>"; };
+		14847BCB1971E83400E52AF2 /* BasicMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicMapAnnotation.h; sourceTree = "<group>"; };
+		14847BCC1971E83400E52AF2 /* BasicMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicMapAnnotation.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +163,12 @@
 		1406E71C196B751100042DF8 /* wotw */ = {
 			isa = PBXGroup;
 			children = (
+				14847BC01971BED200E52AF2 /* CustomAnnotation.h */,
+				14847BC11971BED200E52AF2 /* CustomAnnotation.m */,
+				14847BC81971E67400E52AF2 /* CalloutMapAnnotationView.h */,
+				14847BC91971E67400E52AF2 /* CalloutMapAnnotationView.m */,
+				14847BCB1971E83400E52AF2 /* BasicMapAnnotation.h */,
+				14847BCC1971E83400E52AF2 /* BasicMapAnnotation.m */,
 				1406E763196BBC4800042DF8 /* MessageTableViewCell.h */,
 				1406E764196BBC4800042DF8 /* MessageTableViewCell.m */,
 				1406E760196B9F8400042DF8 /* MessageRepo.h */,
@@ -324,13 +339,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				14847BC21971BED200E52AF2 /* CustomAnnotation.m in Sources */,
 				1406E730196B751100042DF8 /* SecondViewController.m in Sources */,
 				1406E759196B85C700042DF8 /* Location.m in Sources */,
 				1406E765196BBC4800042DF8 /* MessageTableViewCell.m in Sources */,
+				14847BCD1971E83400E52AF2 /* BasicMapAnnotation.m in Sources */,
 				1406E727196B751100042DF8 /* AppDelegate.m in Sources */,
 				1406E762196B9F8400042DF8 /* MessageRepo.m in Sources */,
 				1406E72D196B751100042DF8 /* FirstViewController.m in Sources */,
 				1406E723196B751100042DF8 /* main.m in Sources */,
+				14847BCA1971E67400E52AF2 /* CalloutMapAnnotationView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -551,6 +569,7 @@
 				1406E74A196B751100042DF8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		1406E74B196B751100042DF8 /* Build configuration list for PBXNativeTarget "wotwTests" */ = {
 			isa = XCConfigurationList;
@@ -559,6 +578,7 @@
 				1406E74D196B751100042DF8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

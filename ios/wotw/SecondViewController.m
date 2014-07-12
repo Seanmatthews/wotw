@@ -9,6 +9,9 @@
 #import "SecondViewController.h"
 #import "Location.h"
 #import "MessageRepo.h"
+#import "CalloutView.h"
+#import "CustomAnnotation.h"
+#import "CalloutMapAnnotationView.h"
 
 @interface SecondViewController ()
 {
@@ -17,7 +20,6 @@
 
 - (void)registerForNotifications;
 - (void)receivedFirstLocation;
-- (void)reloadMapAnnotations;
 - (void)addAnnotationWithMessage:(NSString*)message atCoord:(CLLocationCoordinate2D)coord;
 - (void)centerOnUserWithLatDelta:(CGFloat)d1 longDelta:(CGFloat)d2;
 
@@ -25,8 +27,13 @@
 
 @implementation SecondViewController
 
+//@synthesize _calloutAnnotation = _calloutAnnotation;
+@synthesize mapView = _mapView;
+//@synthesize _selectedAnnotationView = _selectedAnnotationView;
+//@synthesize _customAnnotation = _customAnnotation;
 
-static int const PrivateKVOContextTwo;
+
+//static int const PrivateKVOContextTwo;
 
 - (void)viewDidLoad
 {
@@ -34,6 +41,10 @@ static int const PrivateKVOContextTwo;
 	[self registerForNotifications];
     _mapView.userTrackingMode = MKUserTrackingModeFollow;
     [self centerOnUserWithLatDelta:0.2 longDelta:0.2];
+    
+    UIPanGestureRecognizer* panRec = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didDragMap:)];
+    [panRec setDelegate:self];
+    [_mapView addGestureRecognizer:panRec];
     
     visibleAnnotationCount = 0;
 }
@@ -58,11 +69,6 @@ static int const PrivateKVOContextTwo;
                                       context:nil];
 }
 
-- (void)reloadMapAnnotations
-{
-    
-}
-
 
 #pragma mark - Notifications
 
@@ -81,13 +87,16 @@ static int const PrivateKVOContextTwo;
                         change:(NSDictionary *)change
                        context:(void *)context
 {
-    NSLog(@"HERE");
-    if (context == &PrivateKVOContextTwo) {
-//        NSArray* oldChatList = [change objectForKey:@"mapMessages"];
-        [self reloadMapAnnotations];
-    }
-    else {
-        [super observeValueForKeyPath:keyPath ofObject:object change:change context:context];
+    if ([keyPath isEqual:@"mapMessages"]) {
+        for (id d in change[NSKeyValueChangeNewKey]) {
+//            NSLog(@"%@",[d class]);
+            if (d) {
+                CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([[d objectForKey:@"lat"] doubleValue],
+                                                                          [[d objectForKey:@"long"] doubleValue]);
+                [self addAnnotationWithMessage:[d objectForKey:@"message"]
+                                       atCoord:coord];
+            }
+        }
     }
 }
 
@@ -102,12 +111,11 @@ static int const PrivateKVOContextTwo;
 
 #pragma mark - MKMapViewDelegate
 
-- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
-{
-    [[MessageRepo sharedInstance] refreshMapMessagesWithRegion:mapView.region];
-    
-
-}
+//- (void)mapView:(MKMapView *)mapView regionDidChangeAnimated:(BOOL)animated
+//{
+//    [_mapView removeAnnotations:_mapView.annotations];
+//    [[MessageRepo sharedInstance] refreshMapMessagesWithRegion:mapView.region];
+//}
 
 - (void)centerOnUserWithLatDelta:(CGFloat)d1 longDelta:(CGFloat)d2
 {
@@ -130,46 +138,120 @@ static int const PrivateKVOContextTwo;
 //}
 
 
-//// TODO need this??? This method only customizes the pin
+// TODO need this??? This method only customizes the pin
 //- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id < MKAnnotation >)annotation
 //{
-//    MKPinAnnotationView *annotationView = (MKPinAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"AnnotationView"];
+//    if([annotation isKindOfClass:[MKUserLocation class]]) {
+//        return nil;
+//    }
+//    
+//    MKAnnotationView *annotationView = (MKAnnotationView*)[mapView dequeueReusableAnnotationViewWithIdentifier:@"AnnotationView"];
 //    if (annotationView) {
 //        annotationView.annotation = annotation;
 //    }
 //    else {
-//        annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
+//        MKPinAnnotationView *pinView = [[MKPinAnnotationView alloc] init];
+//        annotationView = [[MKAnnotationView alloc] initWithAnnotation:annotation
 //                                                         reuseIdentifier:@"AnnotationView"];
+//        annotationView.image = pinView.image;
 //    }
-//    annotationView.canShowCallout = YES;
-//    
-////    visibleAnnotationCount = 0;
-////    for (MKPointAnnotation *annotation in _mapView.annotations) {
-////        if (MKMapRectContainsPoint(_mapView.visibleMapRect, MKMapPointForCoordinate(annotation.coordinate))) {
-////            visibleAnnotationCount++;
-////        }
-////    }
+////    annotationView.canShowCallout = YES;
 //    
 //    return annotationView;
 //}
 
-// TODO Need this??? Might need it to show a custom callout view
-//- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view
-//{
-//    // TODO need this?
+
+
+//- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+//    if(![view.annotation isKindOfClass:[MKUserLocation class]]) {
+//        CalloutView *calloutView = (CalloutView *)[[[NSBundle mainBundle] loadNibNamed:@"CalloutView" owner:self options:nil] objectAtIndex:0];
+//        CGRect calloutViewFrame = calloutView.frame;
+//        calloutViewFrame.origin = CGPointMake(-calloutViewFrame.size.width/2 + 15, -calloutViewFrame.size.height);
+//        calloutView.frame = calloutViewFrame;
+//        [calloutView.calloutLabel setText:[(CustomAnnotation*)[view annotation] title]];
+//        [view addSubview:calloutView];
+//    }
+//    
 //}
+
+//-(void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
+//    for (UIView *subview in view.subviews ){
+//        [subview removeFromSuperview];
+//    }
+//}
+
+
+
+- (void)mapView:(MKMapView *)mapView didSelectAnnotationView:(MKAnnotationView *)view {
+	if ([view.annotation isKindOfClass:[BasicMapAnnotation class]]) {
+		if (_calloutAnnotation == nil) {
+			_calloutAnnotation = [[CustomAnnotation alloc] initWithLocation:view.annotation.coordinate];
+		} else {
+			_calloutAnnotation.coordinate = view.annotation.coordinate;
+		}
+		[_mapView addAnnotation:_calloutAnnotation];
+		_selectedAnnotationView = view;
+	}
+}
+
+- (void)mapView:(MKMapView *)mapView didDeselectAnnotationView:(MKAnnotationView *)view {
+//	if (_calloutAnnotation && [annotation isKindOfClass:[BasicMapAnnotation class]]) {
+//		[_mapView removeAnnotation: _calloutAnnotation];
+//	}
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
+	if ([annotation isKindOfClass:[CustomAnnotation class]] ) {
+		CalloutMapAnnotationView *calloutMapAnnotationView = (CalloutMapAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:@"CalloutAnnotation"];
+		if (!calloutMapAnnotationView) {
+			calloutMapAnnotationView = [[CalloutMapAnnotationView alloc] initWithAnnotation:annotation
+																			 reuseIdentifier:@"CalloutAnnotation"];
+			calloutMapAnnotationView.contentHeight = 78.0f;
+//			UIImage *asynchronyLogo = [UIImage imageNamed:@"asynchrony-logo-small.png"];
+//			UIImageView *asynchronyLogoView = [[UIImageView alloc] initWithImage:asynchronyLogo];
+//			asynchronyLogoView.frame = CGRectMake(5, 2, asynchronyLogoView.frame.size.width, asynchronyLogoView.frame.size.height);
+//			[calloutMapAnnotationView.contentView addSubview:asynchronyLogoView];
+		}
+		calloutMapAnnotationView.parentAnnotationView = _selectedAnnotationView;
+		calloutMapAnnotationView.mapView = self.mapView;
+		return calloutMapAnnotationView;
+	}
+    else if ([annotation isKindOfClass:[BasicMapAnnotation class]]) {
+		MKPinAnnotationView *annotationView = [[MKPinAnnotationView alloc] initWithAnnotation:annotation
+																			   reuseIdentifier:@"CustomAnnotation"];
+		annotationView.canShowCallout = NO;
+		annotationView.pinColor = MKPinAnnotationColorGreen;
+		return annotationView;
+	}
+	
+	return nil;
+}
 
 
 #pragma mark - Map Annotations
 
 - (void)addAnnotationWithMessage:(NSString*)message atCoord:(CLLocationCoordinate2D)coord
 {
-    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-    annotation.title = @".";
-    annotation.subtitle = message;
+    BasicMapAnnotation *annotation = [[BasicMapAnnotation alloc] init];
+    annotation.title = message;
     annotation.coordinate = coord;
     
-    // TODO add message to mkpointannotation ???
+    [_mapView addAnnotation:annotation];
+}
+
+
+#pragma mark - UIGestureRecognizerDelegate
+
+- (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer {
+    return YES;
+}
+
+// Use this instead of regiondidchange because region changes happen even when a user doesn't drag the map
+- (void)didDragMap:(UIGestureRecognizer*)gestureRecognizer {
+    if (gestureRecognizer.state == UIGestureRecognizerStateEnded){
+        [_mapView removeAnnotations:_mapView.annotations];
+        [[MessageRepo sharedInstance] refreshMapMessagesWithRegion:_mapView.region];
+    }
 }
 
 

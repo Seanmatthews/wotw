@@ -17,7 +17,7 @@
 
 - (void)registerForNotifications;
 - (void)receivedFirstLocation;
-- (NSMutableArray*)getFields:(NSString*)fields toDistance:(NSNumber*)dist;
+- (NSMutableArray*)getFields:(NSString*)fields toDistance:(NSNumber*)dist withLimit:(NSUInteger)limit;
 
 @end
 
@@ -26,6 +26,7 @@
 const long int TWO_WEEKS_SECONDS = 1209600;
 const double MESSAGES_RADIUS_METERS = 50.;
 const short MESSAGE_CHAR_LIMIT = 100;
+const CGFloat METERS_PER_LATITUDE_DEGREE = 111000.;
 
 
 - (id)init
@@ -33,6 +34,7 @@ const short MESSAGE_CHAR_LIMIT = 100;
     self = [super init];
     if (self) {
         _messages = [[NSMutableArray alloc] init];
+        _mapMessages = [[NSMutableArray alloc] init];
         [self registerForNotifications];
         sdbClient = [[AmazonSimpleDBClient alloc]
                      initWithAccessKey:@"AKIAJ5UTQAKVNG2ZWGYA"
@@ -71,7 +73,7 @@ const short MESSAGE_CHAR_LIMIT = 100;
 - (void)refreshMessages
 {
     // array of SimpleDBItem
-    NSMutableArray *items = [self getFields:@"message" toDistance:[NSNumber numberWithDouble:MESSAGES_RADIUS_METERS]];
+    NSMutableArray *items = [self getFields:@"message" toDistance:[NSNumber numberWithDouble:MESSAGES_RADIUS_METERS] withLimit:0];
     
     if (!items) {
         NSLog(@"No items");
@@ -89,21 +91,49 @@ const short MESSAGE_CHAR_LIMIT = 100;
     NSArray *allMessages = [anew valueForKey:@"value"];
     NSLog(@"message count %d", [allMessages count]);
    [[self mutableArrayValueForKey:@"messages"] removeAllObjects]; // This will not trigger KVO observers
-    NSLog(@"after remove");
     [[self mutableArrayValueForKey:@"messages"] addObjectsFromArray:allMessages];
-    NSLog(@"after add messages");
 }
 
 - (void)refreshMapMessagesWithRegion:(MKCoordinateRegion)region
 {
-    // TODO
+    NSNumber *dist = [NSNumber numberWithFloat:(region.span.latitudeDelta * METERS_PER_LATITUDE_DEGREE)];
+    
+    // array of SimpleDBItem
+    NSMutableArray *items = [self getFields:@"message, lat, long" toDistance:dist withLimit:50];
+    
+    if (!items) {
+        NSLog(@"No items");
+        return;
+    }
+    
+    NSMutableArray *messageDicts = [[NSMutableArray alloc] init];;
+    for (SimpleDBItem *item in items) {
+        
+        NSMutableArray *attrs = [item attributes];
+        NSMutableDictionary *dict = [[NSMutableDictionary alloc] init];
+        for (SimpleDBAttribute *attr in attrs) {
+            [dict setObject:[attr valueForKey:@"value"] forKey:[attr valueForKey:@"name"]];
+        }
+        [messageDicts addObject:dict];
+    }
+    
+    // Speedy concurrent bock enumeration
+    [messageDicts enumerateObjectsWithOptions:NSEnumerationConcurrent usingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        double lat = [Location fromLongLong:[[obj objectForKey:@"lat"] longLongValue]];
+        double lon = [Location fromLongLong:[[obj objectForKey:@"long"] longLongValue]];
+        [obj setObject:[NSNumber numberWithDouble:lat] forKey:@"lat"];
+        [obj setObject:[NSNumber numberWithDouble:lon] forKey:@"long"];
+    }];
+    
+    [[self mutableArrayValueForKey:@"mapMessages"] removeAllObjects]; // Will this trigger KVO observers
+    [[self mutableArrayValueForKey:@"mapMessages"] addObjectsFromArray:messageDicts];
 }
 
 
 #pragma mark - AWS interface
 
 // Get DB items by specifying select message and distance from user
-- (NSMutableArray*)getFields:(NSString*)fields toDistance:(NSNumber*)dist
+- (NSMutableArray*)getFields:(NSString*)fields toDistance:(NSNumber*)dist withLimit:(NSUInteger)limit
 {
     NSArray *array = [[Location sharedInstance] coordsAtDistance:dist];
     CLLocationCoordinate2D cmin = [[array objectAtIndex:0] coordinate];
@@ -120,14 +150,17 @@ const short MESSAGE_CHAR_LIMIT = 100;
     
     // NOTE: This version has no two week limit on messages
     NSString *query = [NSString stringWithFormat:@"SELECT %@ FROM `wotw-simpledb` WHERE timestamp IS NOT NULL AND lat > '%@' AND lat < '%@' AND long > '%@' AND long < '%@' ORDER BY timestamp ASC", fields, minLat, maxLat, minLong, maxLong];
-    //    NSString *query = [NSString stringWithFormat:@"SELECT %@ FROM `wotw-simpledb`", fields];
+    
+    if (limit > 0) {
+        query = [query stringByAppendingString:[NSString stringWithFormat:@" limit %d", limit]];
+    }
     NSLog(@" query string: %@",query);
     
     @try {
         SimpleDBSelectRequest *selectRequest = [[SimpleDBSelectRequest alloc] initWithSelectExpression:query];
         selectRequest.consistentRead = YES;
         SimpleDBSelectResponse *selectResponse = [sdbClient select:selectRequest];
-        NSLog(@"select response %@",selectResponse);
+//        NSLog(@"select response %@",selectResponse);
         return selectResponse.items;
     }
     @catch (NSException *exception) {
