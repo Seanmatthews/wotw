@@ -33,15 +33,15 @@ const short MESSAGE_CHAR_LIMIT = 100;
 {
     [super viewDidLoad];
     [self registerForNotifications];
-	
-    // Setup the refresh control
-    // ** Took this out to prevent too man user refreshes
-//    UIRefreshControl *refreshControl = [[UIRefreshControl alloc] init];
-//    [refreshControl addTarget:self action:@selector(refreshTable:) forControlEvents:UIControlEventValueChanged];
-//    [self.tableView addSubview:refreshControl];
 
     _tableView.backgroundColor = [UIColor clearColor];
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"brickwall.png"]];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    [[MessageRepo sharedInstance] refreshMessages];
 }
 
 - (void)didReceiveMemoryWarning
