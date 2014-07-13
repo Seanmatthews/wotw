@@ -15,8 +15,6 @@
 {
     CustomAnnotation *_calloutAnnotation;
 	MKAnnotationView *_selectedAnnotationView;
-    BasicMapAnnotation *_customAnnotation;
-	BasicMapAnnotation *_normalAnnotation;
 }
 
 @property (nonatomic, strong) IBOutlet MKMapView *mapView;

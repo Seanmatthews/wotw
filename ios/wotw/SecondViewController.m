@@ -13,9 +13,6 @@
 #import "CalloutMapAnnotationView.h"
 
 @interface SecondViewController ()
-{
-    NSUInteger visibleAnnotationCount;
-}
 
 - (void)registerForNotifications;
 - (void)receivedFirstLocation;
@@ -26,13 +23,8 @@
 
 @implementation SecondViewController
 
-//@synthesize _calloutAnnotation = _calloutAnnotation;
 @synthesize mapView = _mapView;
-//@synthesize _selectedAnnotationView = _selectedAnnotationView;
-//@synthesize _customAnnotation = _customAnnotation;
 
-
-//static int const PrivateKVOContextTwo;
 
 - (void)viewDidLoad
 {
@@ -45,7 +37,7 @@
     [panRec setDelegate:self];
     [_mapView addGestureRecognizer:panRec];
     
-    visibleAnnotationCount = 0;
+    [[MessageRepo sharedInstance] refreshMapMessagesWithRegion:_mapView.region];
 }
 
 - (void)didReceiveMemoryWarning
@@ -88,7 +80,6 @@
 {
     if ([keyPath isEqual:@"mapMessages"]) {
         for (id d in change[NSKeyValueChangeNewKey]) {
-//            NSLog(@"%@",[d class]);
             if (d) {
                 CLLocationCoordinate2D coord = CLLocationCoordinate2DMake([[d objectForKey:@"lat"] doubleValue],
                                                                           [[d objectForKey:@"long"] doubleValue]);
@@ -160,7 +151,7 @@
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id <MKAnnotation>)annotation {
 	if ([annotation isKindOfClass:[CustomAnnotation class]] ) {
 		CalloutMapAnnotationView *calloutMapAnnotationView = (CalloutMapAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:@"CalloutAnnotation"];
-        NSLog(@"custom title %@",annotation.title);
+        
 		if (!calloutMapAnnotationView) {
 			calloutMapAnnotationView = [[CalloutMapAnnotationView alloc] initWithAnnotation:annotation
 																			 reuseIdentifier:@"CalloutAnnotation"];
@@ -189,7 +180,6 @@
 		annotationView.canShowCallout = NO;
 		annotationView.pinColor = MKPinAnnotationColorRed;
         annotationView.annotation = annotation;
-        NSLog(@"basic title %@",annotation.title);
         
 		return annotationView;
 	}
@@ -219,7 +209,7 @@
 // Use this instead of regiondidchange because region changes happen even when a user doesn't drag the map
 - (void)didDragMap:(UIGestureRecognizer*)gestureRecognizer {
     if (gestureRecognizer.state == UIGestureRecognizerStateEnded){
-        [_mapView removeAnnotations:_mapView.annotations];
+//        [_mapView removeAnnotations:_mapView.annotations];
         [[MessageRepo sharedInstance] refreshMapMessagesWithRegion:_mapView.region];
     }
 }

@@ -125,8 +125,16 @@ const CGFloat METERS_PER_LATITUDE_DEGREE = 111000.;
         [obj setObject:[NSNumber numberWithDouble:lon] forKey:@"long"];
     }];
     
-    [[self mutableArrayValueForKey:@"mapMessages"] removeAllObjects]; // Will this trigger KVO observers
-    [[self mutableArrayValueForKey:@"mapMessages"] addObjectsFromArray:messageDicts];
+    for (id d in messageDicts) {
+        if (![_mapMessages containsObject:d]) {
+            [[self mutableArrayValueForKey:@"mapMessages"] addObject:d];
+        }
+    }
+    
+//    [[self mutableArrayValueForKey:@"mapMessages"] removeAllObjects]; // Will this trigger KVO observers
+//    [[self mutableArrayValueForKey:@"mapMessages"] addObjectsFromArray:messageDicts];
+    
+    
 }
 
 
