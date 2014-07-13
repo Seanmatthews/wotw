@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Rowboat Entertainment. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
 @import MapKit;
 
 @interface CustomAnnotation : NSObject <MKAnnotation>

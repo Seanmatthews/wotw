@@ -197,10 +197,11 @@
 	
 	//Determine Size
 	rect = self.bounds;
-	rect.size.width -= stroke + 14;
+	rect.size.width -= stroke + 14 + 50;
 	rect.size.height -= stroke + CalloutMapAnnotationViewHeightAboveParent - self.offsetFromParent.y + CalloutMapAnnotationViewBottomShadowBufferSize;
-	rect.origin.x += stroke / 2.0 + 7;
+	rect.origin.x += stroke / 2.0 + 7 + 20;
 	rect.origin.y += stroke / 2.0;
+    NSLog(@"rect %f %f %f %f",rect.size.width, rect.size.height, rect.origin.x, rect.origin.y);
 	
 	//Create Path For Callout Bubble
 	CGPathMoveToPoint(path, NULL, rect.origin.x, rect.origin.y + radius);
@@ -226,7 +227,7 @@
 	CGPathCloseSubpath(path);
 	
 	//Fill Callout Bubble & Add Shadow
-	color = [[UIColor blackColor] colorWithAlphaComponent:.6];
+	color = [[UIColor whiteColor] colorWithAlphaComponent:.6];
 	[color setFill];
 	CGContextAddPath(context, path);
 	CGContextSaveGState(context);
