@@ -22,7 +22,9 @@ const NSUInteger TABBAR_HEIGHT = 49;
 //    self.window.rootViewController.canDisplayBannerAds = YES;
     [[Location sharedInstance] startService];
     
-    adView = [[ADBannerView alloc] initWithFrame:CGRectMake(0,469,320,50)];
+//    adView = [[ADBannerView alloc] initWithFrame:CGRectMake(0,469,320,50)];
+    adView = [[ADBannerView alloc] initWithAdType:ADAdTypeBanner];
+    adView.frame = CGRectMake(0,469,320,50);
     adView.delegate = self;
     [self.window.rootViewController.view addSubview:adView];
     
@@ -98,5 +100,28 @@ const NSUInteger TABBAR_HEIGHT = 49;
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
+
+
+#pragma mark - ADBannerViewDelegate
+
+//- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+//{
+//
+//}
+//
+//- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+//{
+//
+//}
+
+- (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
+{
+    return YES;
+}
+
+//- (void)bannerViewActionDidFinish:(ADBannerView *)banner
+//{
+//
+//}
 
 @end
