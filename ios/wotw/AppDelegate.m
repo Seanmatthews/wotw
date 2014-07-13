@@ -24,7 +24,10 @@ const NSUInteger TABBAR_HEIGHT = 49;
     
 //    adView = [[ADBannerView alloc] initWithFrame:CGRectMake(0,469,320,50)];
     adView = [[ADBannerView alloc] initWithAdType:ADAdTypeBanner];
-    adView.frame = CGRectMake(0,469,320,50);
+    adView.frame = CGRectMake(0,
+                              self.window.bounds.size.height - 49 - adView.bounds.size.height,
+                              adView.bounds.size.width,
+                              adView.bounds.size.height);
     adView.delegate = self;
     [self.window.rootViewController.view addSubview:adView];
     
