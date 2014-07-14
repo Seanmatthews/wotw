@@ -25,7 +25,6 @@
 
 const long int TWO_WEEKS_SECONDS = 1209600;
 const double MESSAGES_RADIUS_METERS = 50.;
-const short MESSAGE_CHAR_LIMIT = 100;
 const CGFloat METERS_PER_LATITUDE_DEGREE = 111000.;
 
 

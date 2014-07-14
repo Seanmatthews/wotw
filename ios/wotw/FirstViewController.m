@@ -25,7 +25,7 @@
 
 
 static int const PrivateKVOContextOne;
-const NSUInteger TABBAR_HEIGHT = 49;
+const NSUInteger TABBAR_HEIGHT_ = 49;
 const short MESSAGE_CHAR_LIMIT = 100;
 
 
@@ -114,7 +114,7 @@ const short MESSAGE_CHAR_LIMIT = 100;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3]; // if you want to slide up the view
     CGRect rect = self.view.frame;
-    rect.origin.y -= kbSize.height - TABBAR_HEIGHT;
+    rect.origin.y -= kbSize.height - TABBAR_HEIGHT_;
     self.view.frame = rect;
     
     [UIView commitAnimations];
@@ -131,7 +131,7 @@ const short MESSAGE_CHAR_LIMIT = 100;
     [UIView beginAnimations:nil context:NULL];
     [UIView setAnimationDuration:0.3]; // if you want to slide up the view
     CGRect rect = self.view.frame;
-    rect.origin.y += kbSize.height - TABBAR_HEIGHT;
+    rect.origin.y += kbSize.height - TABBAR_HEIGHT_;
     self.view.frame = rect;
     [UIView commitAnimations];
 }

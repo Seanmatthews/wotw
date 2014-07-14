@@ -29,16 +29,16 @@
 		1406E759196B85C700042DF8 /* Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 1406E758196B85C700042DF8 /* Location.m */; };
 		1406E75B196B85EE00042DF8 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1406E75A196B85EE00042DF8 /* iAd.framework */; };
 		1406E75D196B866900042DF8 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1406E75C196B866900042DF8 /* MapKit.framework */; };
-		1406E75F196B8ACE00042DF8 /* AWSSimpleDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1406E75E196B8ACE00042DF8 /* AWSSimpleDB.framework */; };
 		1406E762196B9F8400042DF8 /* MessageRepo.m in Sources */ = {isa = PBXBuildFile; fileRef = 1406E761196B9F8400042DF8 /* MessageRepo.m */; };
 		1406E765196BBC4800042DF8 /* MessageTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 1406E764196BBC4800042DF8 /* MessageTableViewCell.m */; };
-		1406E767196BC89600042DF8 /* AWSRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1406E766196BC89600042DF8 /* AWSRuntime.framework */; };
 		1406E769196BE95F00042DF8 /* bubble.png in Resources */ = {isa = PBXBuildFile; fileRef = 1406E768196BE95F00042DF8 /* bubble.png */; };
 		1406E76B196BE9CB00042DF8 /* location_pointer.png in Resources */ = {isa = PBXBuildFile; fileRef = 1406E76A196BE9CB00042DF8 /* location_pointer.png */; };
 		1406E76D196BEA6500042DF8 /* refresh-outlined.png in Resources */ = {isa = PBXBuildFile; fileRef = 1406E76C196BEA6500042DF8 /* refresh-outlined.png */; };
 		14847BC21971BED200E52AF2 /* CustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 14847BC11971BED200E52AF2 /* CustomAnnotation.m */; };
 		14847BCA1971E67400E52AF2 /* CalloutMapAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 14847BC91971E67400E52AF2 /* CalloutMapAnnotationView.m */; };
 		14847BCD1971E83400E52AF2 /* BasicMapAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = 14847BCC1971E83400E52AF2 /* BasicMapAnnotation.m */; };
+		14847BCF197354A400E52AF2 /* AWSSimpleDB.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14847BCE197354A400E52AF2 /* AWSSimpleDB.framework */; };
+		14847BD1197354AE00E52AF2 /* AWSRuntime.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 14847BD0197354AD00E52AF2 /* AWSRuntime.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,12 +81,10 @@
 		1406E758196B85C700042DF8 /* Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Location.m; sourceTree = "<group>"; };
 		1406E75A196B85EE00042DF8 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		1406E75C196B866900042DF8 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
-		1406E75E196B8ACE00042DF8 /* AWSSimpleDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSimpleDB.framework; path = "../../src/wotw/apis/aws-ios-sdk-1.7.1/AWSSimpleDB.framework"; sourceTree = "<group>"; };
 		1406E760196B9F8400042DF8 /* MessageRepo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageRepo.h; sourceTree = "<group>"; };
 		1406E761196B9F8400042DF8 /* MessageRepo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageRepo.m; sourceTree = "<group>"; };
 		1406E763196BBC4800042DF8 /* MessageTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageTableViewCell.h; sourceTree = "<group>"; };
 		1406E764196BBC4800042DF8 /* MessageTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageTableViewCell.m; sourceTree = "<group>"; };
-		1406E766196BC89600042DF8 /* AWSRuntime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSRuntime.framework; path = "../../src/wotw/apis/aws-ios-sdk-1.7.1/AWSRuntime.framework"; sourceTree = "<group>"; };
 		1406E768196BE95F00042DF8 /* bubble.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = bubble.png; path = media/bubble.png; sourceTree = "<group>"; };
 		1406E76A196BE9CB00042DF8 /* location_pointer.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = location_pointer.png; path = media/location_pointer.png; sourceTree = "<group>"; };
 		1406E76C196BEA6500042DF8 /* refresh-outlined.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "refresh-outlined.png"; path = "media/refresh-outlined.png"; sourceTree = "<group>"; };
@@ -96,6 +94,8 @@
 		14847BC91971E67400E52AF2 /* CalloutMapAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CalloutMapAnnotationView.m; sourceTree = "<group>"; };
 		14847BCB1971E83400E52AF2 /* BasicMapAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BasicMapAnnotation.h; sourceTree = "<group>"; };
 		14847BCC1971E83400E52AF2 /* BasicMapAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BasicMapAnnotation.m; sourceTree = "<group>"; };
+		14847BCE197354A400E52AF2 /* AWSSimpleDB.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSSimpleDB.framework; path = "../apis/aws-ios-sdk-1.7.1/AWSSimpleDB.framework"; sourceTree = "<group>"; };
+		14847BD0197354AD00E52AF2 /* AWSRuntime.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AWSRuntime.framework; path = "../apis/aws-ios-sdk-1.7.1/AWSRuntime.framework"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,8 +103,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1406E767196BC89600042DF8 /* AWSRuntime.framework in Frameworks */,
-				1406E75F196B8ACE00042DF8 /* AWSSimpleDB.framework in Frameworks */,
+				14847BD1197354AE00E52AF2 /* AWSRuntime.framework in Frameworks */,
+				14847BCF197354A400E52AF2 /* AWSSimpleDB.framework in Frameworks */,
 				1406E75D196B866900042DF8 /* MapKit.framework in Frameworks */,
 				1406E75B196B85EE00042DF8 /* iAd.framework in Frameworks */,
 				1406E719196B751100042DF8 /* CoreGraphics.framework in Frameworks */,
@@ -148,8 +148,8 @@
 		1406E715196B751100042DF8 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				1406E766196BC89600042DF8 /* AWSRuntime.framework */,
-				1406E75E196B8ACE00042DF8 /* AWSSimpleDB.framework */,
+				14847BD0197354AD00E52AF2 /* AWSRuntime.framework */,
+				14847BCE197354A400E52AF2 /* AWSSimpleDB.framework */,
 				1406E75C196B866900042DF8 /* MapKit.framework */,
 				1406E75A196B85EE00042DF8 /* iAd.framework */,
 				1406E716196B751100042DF8 /* Foundation.framework */,
