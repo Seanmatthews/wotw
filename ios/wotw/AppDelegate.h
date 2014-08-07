@@ -12,6 +12,7 @@
 @interface AppDelegate : UIResponder <UIApplicationDelegate, ADBannerViewDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-//@property (strong, nonatomic) IBOutlet ADBannerView *adView;
+@property (strong, nonatomic) IBOutlet UITabBarController *tabbarController;
+
 
 @end

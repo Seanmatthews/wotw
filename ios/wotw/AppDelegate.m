@@ -22,6 +22,11 @@ const NSUInteger TABBAR_HEIGHT = 49;
 //    self.window.rootViewController.canDisplayBannerAds = YES;
     [[Location sharedInstance] startService];
     
+    // Change the tint of the tabbar
+    [[UITabBar appearance] setTintColor:[UIColor whiteColor]];
+    [[UITabBar appearance] setBarTintColor:[UIColor blackColor]];
+    [[UITabBar appearance] setBarStyle:UIBarStyleBlackOpaque];
+    
 //    adView = [[ADBannerView alloc] initWithFrame:CGRectMake(0,469,320,50)];
     adView = [[ADBannerView alloc] initWithAdType:ADAdTypeBanner];
     adView.frame = CGRectMake(0,
@@ -30,6 +35,7 @@ const NSUInteger TABBAR_HEIGHT = 49;
                               adView.bounds.size.height);
     adView.delegate = self;
     [self.window.rootViewController.view addSubview:adView];
+    adView.hidden = YES;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(keyboardWasShown:)
@@ -107,24 +113,20 @@ const NSUInteger TABBAR_HEIGHT = 49;
 
 #pragma mark - ADBannerViewDelegate
 
-//- (void)bannerViewDidLoadAd:(ADBannerView *)banner
-//{
-//
-//}
-//
-//- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
-//{
-//
-//}
+- (void)bannerViewWillLoadAd:(ADBannerView *)banner
+{
+    adView.hidden = NO;
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+    adView.hidden = YES;
+}
 
 - (BOOL)bannerViewActionShouldBegin:(ADBannerView *)banner willLeaveApplication:(BOOL)willLeave
 {
     return YES;
 }
 
-//- (void)bannerViewActionDidFinish:(ADBannerView *)banner
-//{
-//
-//}
 
 @end
