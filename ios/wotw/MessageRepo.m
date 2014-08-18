@@ -17,7 +17,8 @@
 
 - (void)registerForNotifications;
 - (void)receivedFirstLocation;
-- (NSMutableArray*)getFields:(NSString*)fields toDistance:(NSNumber*)dist withLimit:(NSUInteger)limit;
+- (NSArray*)performQuery:(NSString*)query;
+- (NSArray*)getFields:(NSString*)fields toDistance:(NSNumber*)dist withLimit:(NSUInteger)limit;
 
 @end
 
@@ -26,6 +27,7 @@
 const long int TWO_WEEKS_SECONDS = 1209600;
 const double MESSAGES_RADIUS_METERS = 50.;
 const CGFloat METERS_PER_LATITUDE_DEGREE = 111000.;
+const long long MAX_SIMPLEDB_ELEMENTS = 2500;
 
 
 - (id)init
@@ -72,14 +74,14 @@ const CGFloat METERS_PER_LATITUDE_DEGREE = 111000.;
 - (void)refreshMessages
 {
     // array of SimpleDBItem
-    NSMutableArray *items = [self getFields:@"message" toDistance:[NSNumber numberWithDouble:MESSAGES_RADIUS_METERS] withLimit:0];
+    NSArray *items = [self getFields:@"message" toDistance:[NSNumber numberWithDouble:MESSAGES_RADIUS_METERS] withLimit:0];
     
     if (!items) {
         NSLog(@"No items");
         return;
     }
     
-    NSArray *anew = [[NSArray alloc] init];;
+    NSArray *anew = [[NSArray alloc] init];
     for (SimpleDBItem *item in items) {
         NSMutableArray *attrs = [item attributes];
         anew = [anew arrayByAddingObjectsFromArray:attrs];
@@ -98,7 +100,7 @@ const CGFloat METERS_PER_LATITUDE_DEGREE = 111000.;
     NSNumber *dist = [NSNumber numberWithFloat:(region.span.latitudeDelta * METERS_PER_LATITUDE_DEGREE)];
     
     // array of SimpleDBItem
-    NSMutableArray *items = [self getFields:@"message, lat, long" toDistance:dist withLimit:50];
+    NSArray *items = [self getFields:@"message, lat, long" toDistance:dist withLimit:0];
     
     if (!items) {
         NSLog(@"No items");
@@ -140,7 +142,7 @@ const CGFloat METERS_PER_LATITUDE_DEGREE = 111000.;
 #pragma mark - AWS interface
 
 // Get DB items by specifying select message and distance from user
-- (NSMutableArray*)getFields:(NSString*)fields toDistance:(NSNumber*)dist withLimit:(NSUInteger)limit
+- (NSArray*)getFields:(NSString*)fields toDistance:(NSNumber*)dist withLimit:(NSUInteger)limit
 {
     NSArray *array = [[Location sharedInstance] coordsAtDistance:dist];
     CLLocationCoordinate2D cmin = [[array objectAtIndex:0] coordinate];
@@ -156,25 +158,25 @@ const CGFloat METERS_PER_LATITUDE_DEGREE = 111000.;
     //    NSString *query = [NSString stringWithFormat:@"SELECT %@ FROM `wotw-simpledb` WHERE timestamp IS NOT NULL AND lat > '%@' AND lat < '%@' AND long > '%@' AND long < '%@' AND timestamp > '%d' ORDER BY timestamp ASC", fields, minLat, maxLat, minLong, maxLong, ([timestamp longValue] - TWO_WEEKS_SECONDS)];
     
     // NOTE: This version has no two week limit on messages
-    NSString *query = [NSString stringWithFormat:@"SELECT %@ FROM `wotw-simpledb` WHERE timestamp IS NOT NULL AND lat > '%@' AND lat < '%@' AND long > '%@' AND long < '%@' ORDER BY timestamp ASC", fields, minLat, maxLat, minLong, maxLong];
+    NSString *query = [NSString stringWithFormat:@"SELECT %@ FROM `wotw-simpledb` WHERE timestamp IS NOT NULL AND lat > '%@' AND lat < '%@' AND long > '%@' AND long < '%@' ORDER BY timestamp ASC",
+                       fields, minLat, maxLat, minLong, maxLong];
     
     if (limit > 0) {
-        query = [query stringByAppendingString:[NSString stringWithFormat:@" limit %d", limit]];
+        query = [query stringByAppendingString:[NSString stringWithFormat:@" LIMIT %d", limit]];
     }
     NSLog(@" query string: %@",query);
     
-    @try {
-        SimpleDBSelectRequest *selectRequest = [[SimpleDBSelectRequest alloc] initWithSelectExpression:query];
-        selectRequest.consistentRead = YES;
-        SimpleDBSelectResponse *selectResponse = [sdbClient select:selectRequest];
-//        NSLog(@"select response %@",selectResponse);
-        return selectResponse.items;
-    }
-    @catch (NSException *exception) {
-        NSLog(@"Exception : [%@]", exception);
-    }
+//    @try {
+//        SimpleDBSelectRequest *selectRequest = [[SimpleDBSelectRequest alloc] initWithSelectExpression:query];
+//        selectRequest.consistentRead = YES;
+//        SimpleDBSelectResponse *selectResponse = [sdbClient select:selectRequest];
+//        return selectResponse.items;
+//    }
+//    @catch (NSException *exception) {
+//        NSLog(@"Exception : [%@]", exception);
+//    }
     
-    return nil;
+    return [self performQuery:query];
 }
 
 - (void)writeOnWall:(NSString*)message
@@ -207,6 +209,29 @@ const CGFloat METERS_PER_LATITUDE_DEGREE = 111000.;
     @catch (NSException *exception) {
         NSLog(@"Exception : [%@]", exception);
     }
+}
+
+- (NSArray*)performQuery:(NSString*)query
+{
+    NSMutableArray* items = [[NSMutableArray alloc] init];
+    SimpleDBSelectRequest *selectRequest = nil;
+    SimpleDBSelectResponse *selectResponse = nil;
+    
+    @try {
+        do {
+            selectRequest = [[SimpleDBSelectRequest alloc] initWithSelectExpression:query];
+            selectRequest.consistentRead = YES;
+            selectResponse = [sdbClient select:selectRequest];
+            [items addObjectsFromArray:selectResponse.items];
+            selectRequest.nextToken = selectResponse.nextToken;
+        }
+        while (selectResponse.nextToken);
+    }
+    @catch (NSException *exception) {
+        NSLog(@"Exception : [%@]", exception);
+    }
+    
+    return [items copy];
 }
 
 @end
