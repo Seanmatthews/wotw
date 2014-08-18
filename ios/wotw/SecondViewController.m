@@ -33,9 +33,17 @@
     _mapView.userTrackingMode = MKUserTrackingModeFollow;
     [self centerOnUserWithLatDelta:0.2 longDelta:0.2];
     
-    UIPanGestureRecognizer* panRec = [[UIPanGestureRecognizer alloc] initWithTarget:self action:@selector(didDragMap:)];
+    // We use gesture recognizers to detect region movement instead of regionDidChange.
+    // This is because regionDidChange can occur on non-user events as well, such as the
+    // screen moving for a callout view. This fucks shit up.
+    UIPanGestureRecognizer* panRec = [[UIPanGestureRecognizer alloc] initWithTarget:self
+                                                                             action:@selector(didDragMap:)];
+    UIPinchGestureRecognizer* pinchRec = [[UIPinchGestureRecognizer alloc] initWithTarget:self
+                                                                                   action:@selector(didDragMap:)];
     [panRec setDelegate:self];
+    [pinchRec setDelegate:self];
     [_mapView addGestureRecognizer:panRec];
+    [_mapView addGestureRecognizer:pinchRec];
     
     [[MessageRepo sharedInstance] refreshMapMessagesWithRegion:_mapView.region];
 }
@@ -213,6 +221,7 @@
         [[MessageRepo sharedInstance] refreshMapMessagesWithRegion:_mapView.region];
     }
 }
+
 
 
 @end
